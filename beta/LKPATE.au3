@@ -1,15 +1,15 @@
 #Region ;**** 参数创建于 ACNWrapper_GUI ****
 #AutoIt3Wrapper_Icon=Windows Update.ico
-#AutoIt3Wrapper_OutFile=CheckUpDate.exe
+#AutoIt3Wrapper_OutFile=release\CheckUpDate.exe
 #AutoIt3Wrapper_UseX64=n
 #AutoIt3Wrapper_Res_Comment=软件更新检查工具
 #AutoIt3Wrapper_Res_Description=软件更新检查工具
-#AutoIt3Wrapper_Res_FileVersion=1.4.0.0
+#AutoIt3Wrapper_Res_FileVersion=1.5.0.0
 #AutoIt3Wrapper_Res_LegalCopyright=Copyright (c) 2015 睿派克技术论坛. All Rights Reserved.
 #AutoIt3Wrapper_Res_SaveSource=y
 #AutoIt3Wrapper_Res_Field=OriginalFilename|软件更新检查工具
 #AutoIt3Wrapper_Res_Field=ProductName|软件更新检查工具
-#AutoIt3Wrapper_Res_Field=ProductVersion|1.4.0.0
+#AutoIt3Wrapper_Res_Field=ProductVersion|1.5.0.0
 #AutoIt3Wrapper_Res_Field=InternalName|软件更新检查工具
 #AutoIt3Wrapper_Res_Field=FileDescription|自动检查软件更新
 #AutoIt3Wrapper_Res_Field=Comments|自动检查软件更新的工具
