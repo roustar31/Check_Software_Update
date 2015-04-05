@@ -6,7 +6,6 @@
 #AutoIt3Wrapper_Res_Description=软件更新检查工具
 #AutoIt3Wrapper_Res_FileVersion=1.5.0.0
 #AutoIt3Wrapper_Res_LegalCopyright=Copyright (c) 2015 睿派克技术论坛. All Rights Reserved.
-#AutoIt3Wrapper_Res_SaveSource=y
 #AutoIt3Wrapper_Res_Field=OriginalFilename|软件更新检查工具
 #AutoIt3Wrapper_Res_Field=ProductName|软件更新检查工具
 #AutoIt3Wrapper_Res_Field=ProductVersion|1.5.0.0
@@ -62,6 +61,7 @@ If $idmpath = "" Then
 EndIf
 $DownPath = @ScriptDir & "\New"
 If Not FileExists($DownPath) Then DirCreate($DownPath)
+$OLDNotepad2 = IniRead(@ScriptDir & "\CheckUp.Dat", "Notepad2", "url", "")
 $OLDThunderSP = IniRead(@ScriptDir & "\CheckUp.Dat", "ThunderSP", "url", "")
 $OLDSystemExplorer = IniRead(@ScriptDir & "\CheckUp.Dat", "SystemExplorer", "url", "")
 $OLDAutoruns = IniRead(@ScriptDir & "\CheckUp.Dat", "Autoruns", "date", "")
@@ -232,6 +232,19 @@ Else
 		$NEWThunderSP = $OLDThunderSP
 	Else
 		$NEWThunderSP = $ThunderSPVs[0]
+	EndIf
+EndIf
+
+TrayTip("提示", "开始检查 Notepad2-Mod 更新......", 3, 1)
+$Notepad2Surls = _INetGetSource("http://xhmikosr.github.io/notepad2-mod/")
+If @error Then
+	$NEWNotepad2 = $OLDNotepad2
+Else
+	$Notepad2Vs = StringRegExp($Notepad2Surls, '(https://github.com/XhmikosR/notepad2-mod/releases/download/.+?exe)', 3)
+	If @error Or $Notepad2Vs = "1" Then
+		$NEWNotepad2 = $OLDNotepad2
+	Else
+		$NEWNotepad2 = $Notepad2Vs[0]
 	EndIf
 EndIf
 
@@ -487,9 +500,21 @@ If @error Then
 Else
 	$FSCaptures = StringRegExp($FSCaptureSurls, '(http://www.faststonesoft.net/DN/FSCapture.+?zip)', 3)
 	If @error Then $FSCapture = $OLDFSCapture
-	$FSCapture = $FSCaptures[0]
+	$FSCapture = $FSCaptures[1]
 EndIf
 ;------------------FSCapture检查结束----------------------
+
+TrayTip("提示", "开始检查  FastStone Image Viewer 更新......", 3, 1)
+$FSViewerSurls = _INetGetSource("http://www.faststone.org/FSViewerDownload.htm")
+If @error Then
+	$NEWFSViewer = $OLDFSViewer
+Else
+	$FSViewers = StringRegExp($FSViewerSurls, '(http://www.faststonesoft.net/DN/FSViewer.+?zip)', 3)
+	If @error Then $NEWFSViewer = $OLDFSViewer
+	$NEWFSViewer = $FSViewers[1]
+EndIf
+;------------------FastStone Image Viewer检查结束----------------------
+
 TrayTip("提示", "开始检查 HyperSnap 更新......", 3, 1)
 
 $HyperUrls = _INetGetSource("http://www.hyperionics.com/hsdx/downloads.asp")
@@ -702,7 +727,6 @@ If $NewVersion <> $OldVersion Then
 	TrayTip("提示", "检查到 LuckyPatcher 最新版，版本为：" & $NewVersion & "开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\LuckyPatcher.apk") Then FileDelete(@ScriptDir & "\New\LuckyPatcher.apk")
-	;InetGet($LKDownUrl, @ScriptDir & "\New\LuckyPatcher" & $NewVersion & ".apk", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $LKDownUrl & ' /p ' & $DownPath & ' /f LuckyPatcher.apk', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "luckPath", "verion", $NewVersion)
 EndIf
@@ -719,7 +743,6 @@ If $PTNEWSIZE <> $PTOldSIZE Then
 	TrayTip("提示", "检查到 PotPlayer 测试版 最新版，新版大小为：" & $PTNEWSIZE & "开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\PotPlayerSetupbeta.exe") Then FileDelete(@ScriptDir & "\New\PotPlayerSetupbeta.exe")
-	;InetGet($POTDownUrl, @ScriptDir & "\New\PotPlayerSetupbeta.exe", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $POTDownUrl & ' /p ' & $DownPath & ' /f PotPlayerSetupbeta.exe', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "pot", "size", $PTNEWSIZE)
 EndIf
@@ -728,7 +751,6 @@ If $PTNEWSIZE1 <> $PTOldSIZE1 Then
 	TrayTip("提示", "检查到 PotPlayer 测试版 最新版，新版大小为：" & $PTNEWSIZE1 & "开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\PotPlayerSetup.exe") Then FileDelete(@ScriptDir & "\New\PotPlayerSetup.exe")
-	;InetGet($POTDownUrl, @ScriptDir & "\New\PotPlayerSetupbeta.exe", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $POTDownUrl1 & ' /p ' & $DownPath & ' /f PotPlayerSetup.exe', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "pot", "size1", $PTNEWSIZE1)
 EndIf
@@ -739,7 +761,6 @@ If $163MUSICNEWSIZE <> $163MUSICOldSIZE Then
 	TrayTip("提示", "检查到 网易云音乐 正式版 最新版，新版大小为：" & $163MUSICNEWSIZE & "开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\163music.exe") Then FileDelete(@ScriptDir & "\New\163music.exe")
-	;InetGet("http://music.163.com/api/pc/download/latest", @ScriptDir & "\New\163music.exe", 1, 0)
 	ShellExecute($idmpath, '/n /q /d "http://music.163.com/api/pc/download/latest" /p ' & $DownPath & ' /f 163music.exe', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "163music", "size", $163MUSICNEWSIZE)
 EndIf
@@ -747,7 +768,6 @@ If $OLDIDMDURL <> $IDMDURL Then
 	TrayTip("提示", "检查到 IDM 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\IDM.exe") Then FileDelete(@ScriptDir & "\New\IDM.exe")
-	;InetGet($IDMDURL, @ScriptDir & "\New\IDM.EXE", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $IDMDURL & ' /p ' & $DownPath & ' /f IDM.EXE', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "IDM", "url", $IDMDURL)
 EndIf
@@ -756,7 +776,6 @@ If $OLDPPTVDURL <> $PPTVDURL Then
 	TrayTip("提示", "检查到 PPTV 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\PPTV.exe") Then FileDelete(@ScriptDir & "\New\PPTV.exe")
-	;InetGet($PPTVDURL, @ScriptDir & "\New\PPTV.EXE", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $PPTVDURL & ' /p ' & $DownPath & ' /f PPTV.EXE', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "PPTV", "url", $PPTVDURL)
 EndIf
@@ -765,7 +784,6 @@ If $OLDWinSnapDURL <> $WinSnapDURL Then
 	TrayTip("提示", "检查到 WinSnap 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\WinSnap.exe") Then FileDelete(@ScriptDir & "\New\WinSnap.exe")
-	;InetGet($WinSnapDURL, @ScriptDir & "\New\WinSnap.EXE", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $WinSnapDURL & ' /p ' & $DownPath & ' /f WinSnap.EXE', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "WinSnap", "url", $WinSnapDURL)
 EndIf
@@ -791,9 +809,7 @@ If $OLDDGDURL <> $DGDURL Then
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\DGX64.zip") Then FileDelete(@ScriptDir & "\New\DGX64.zip")
 	If FileExists(@ScriptDir & "\New\DGX86.zip") Then FileDelete(@ScriptDir & "\New\DGX86.zip")
-	;InetGet($DGVerionx64, @ScriptDir & "\New\DGX64.zip", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $DGVerionx64 & ' /p ' & $DownPath & ' /f DGX64.zip', @ScriptDir & "\New", "")
-	;InetGet($DGVerionx86, @ScriptDir & "\New\DGX86.zip", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $DGVerionx86 & ' /p ' & $DownPath & ' /f DGX86.zip', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "DG", "url", $DGDURL)
 EndIf
@@ -803,7 +819,6 @@ If $OLDccleaner <> $ccleanerDURL Then
 	Beep(600, 1000)
 	$ccleanerDURL2 = StringSplit($ccleanerDURL, ".")
 	$ccleanerDURL3 = "http://download.piriform.com/ccsetup" & $ccleanerDURL2[1] & $ccleanerDURL2[2] & "pro.exe"
-	;InetGet($ccleanerDURL3, @ScriptDir & "\New\ccsetuppro.exe", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $ccleanerDURL3 & ' /p ' & $DownPath & ' /f ccsetuppro.exe', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "ccleaner", "ver", $ccleanerDURL)
 EndIf
@@ -813,7 +828,6 @@ If $OLDspeccy <> $speccyDURL Then
 	Beep(600, 1000)
 	$speccyDURL2 = StringSplit($speccyDURL, ".")
 	$speccyDURL3 = "http://download.piriform.com/spsetup" & $speccyDURL2[1] & $speccyDURL2[2] & ".exe"
-	;InetGet($speccyDURL3, @ScriptDir & "\New\ccsetuppro.exe", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $speccyDURL3 & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "speccy", "ver", $speccyDURL)
 EndIf
@@ -823,7 +837,6 @@ If $OLDrecuva <> $recuvaDURL Then
 	Beep(600, 1000)
 	$recuvaDURL2 = StringSplit($recuvaDURL, ".")
 	$recuvaDURL3 = "http://download.piriform.com/spsetup" & $recuvaDURL2[1] & $recuvaDURL2[2] & ".exe"
-	;InetGet($ccleanerDURL3, @ScriptDir & "\New\ccsetuppro.exe", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $recuvaDURL3 & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "recuva", "ver", $recuvaDURL)
 EndIf
@@ -833,7 +846,6 @@ If $OLDdefraggler <> $defragglerDURL Then
 	Beep(600, 1000)
 	$defragglerDURL2 = StringSplit($defragglerDURL, ".")
 	$defragglerDURL3 = "http://download.piriform.com/dfsetup" & $defragglerDURL2[1] & $defragglerDURL2[2] & ".exe"
-	;InetGet($ccleanerDURL3, @ScriptDir & "\New\ccsetuppro.exe", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $defragglerDURL3 & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "defraggler", "ver", $defragglerDURL)
 EndIf
@@ -842,7 +854,6 @@ If $OLDTagScannerDURL <> $TagScannerDURL Then
 	TrayTip("提示", "检查到 TagScanner 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\TagScanner.zip") Then FileDelete(@ScriptDir & "\New\TagScanner.zip")
-	;InetGet($TagScannerDURL, @ScriptDir & "\New\TagScanner.zip", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $TagScannerDURL & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "TagScanner", "url", $TagScannerDURL)
 EndIf
@@ -850,9 +861,7 @@ EndIf
 If $OLDQQDURL <> $QQDURL Then
 	TrayTip("提示", "检查到 PC QQ 正式版 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
-
 	Local $QQFileName = $QQVerionSstrings[6] & "." & $QQVerionSstrings[7] & ".exe"
-	;InetGet($QQDURL, @ScriptDir & "\New\" & $QQFileName, 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $QQDURL & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "QQ", "url", $QQDURL)
 EndIf
@@ -893,7 +902,6 @@ If $OLDEditPlusDURL32 <> $EditPlusDURL32 Then
 	TrayTip("提示", "检查到 EditPlus32位 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\EditPlus32.EXE") Then FileDelete(@ScriptDir & "\New\EditPlus32.EXE")
-	;InetGet($EditPlusDURL32, @ScriptDir & "\New\EditPlus32.EXE", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $EditPlusDURL32 & ' /p ' & $DownPath & ' /f EditPlus32.EXE', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "EditPlus", "url32", $EditPlusDURL32)
 EndIf
@@ -902,7 +910,6 @@ If $OLDEditPlusDURL64 <> $EditPlusDURL64 Then
 	TrayTip("提示", "检查到 EditPlus64 位最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\EditPlus64.EXE") Then FileDelete(@ScriptDir & "\New\EditPlus64.EXE")
-	;InetGet($EditPlusDURL64, @ScriptDir & "\New\EditPlus64.EXE", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $EditPlusDURL64 & ' /p ' & $DownPath & ' /f EditPlus64.EXE', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "EditPlus", "url64", $EditPlusDURL64)
 EndIf
@@ -911,7 +918,6 @@ If $OLDFlashFxpDURL <> $FlashFxpDURL Then
 	TrayTip("提示", "检查到 FlashFxp 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\FlashFxp.EXE") Then FileDelete(@ScriptDir & "\New\FlashFxp.EXE")
-	;InetGet($FlashFxpDURL, @ScriptDir & "\New\FlashFxp.EXE", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $FlashFxpDURL & ' /p ' & $DownPath & ' /f FlashFxp.EXE', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "FlashFxp", "url", $FlashFxpDURL)
 EndIf
@@ -920,7 +926,6 @@ If $OLDMp3TagDURL <> $Mp3TagDURL Then
 	TrayTip("提示", "检查到 Mp3Tag 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\Mp3Tag.EXE") Then FileDelete(@ScriptDir & "\New\Mp3Tag.EXE")
-	;InetGet($Mp3TagDURL, @ScriptDir & "\New\Mp3Tag.EXE", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $Mp3TagDURL & ' /p ' & $DownPath & ' /f Mp3Tag.EXE', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "Mp3Tag", "url", $Mp3TagDURL)
 EndIf
@@ -930,7 +935,6 @@ If $OLDEmEditorDURL32 <> $EmEditorDURL32 Then
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\EmEditor32.EXE") Then FileDelete(@ScriptDir & "\New\EmEditor32.EXE")
 	If FileExists(@ScriptDir & "\New\EmEditor32.zip") Then FileDelete(@ScriptDir & "\New\EmEditor32.zip")
-	;InetGet($EmEditorDURL32, @ScriptDir & "\New\EmEditor32.zip", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $EmEditorDURL32 & ' /p ' & $DownPath & ' /f EmEditor32.zip', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "EmEditor", "url32", $EmEditorDURL32)
 EndIf
@@ -940,7 +944,6 @@ If $OLDEmEditorDURL64 <> $EmEditorDURL64 Then
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\EmEditor64.EXE") Then FileDelete(@ScriptDir & "\New\EmEditor64.EXE")
 	If FileExists(@ScriptDir & "\New\EmEditor64.zip") Then FileDelete(@ScriptDir & "\New\EmEditor64.zip")
-	;InetGet($EmEditorDURL64, @ScriptDir & "\New\EmEditor64.zip", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $EmEditorDURL64 & ' /p ' & $DownPath & ' /f EmEditor64.zip', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "EmEditor", "url64", $EmEditorDURL64)
 EndIf
@@ -949,7 +952,6 @@ If $FSCapture <> $OLDFSCapture Then
 	TrayTip("提示", "检查到 FastStone Capture 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\FSCapture.zip") Then FileDelete(@ScriptDir & "\New\FSCapture.zip")
-	;InetGet($FSCapture, @ScriptDir & "\New\FSCapture.zip", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $FSCapture & ' /p ' & $DownPath & ' /f FSCapture.zip', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "FSCapture", "url", $FSCapture)
 EndIf
@@ -957,7 +959,6 @@ If $GIFCAMNEWSIZE <> $GIFCAMOldSIZE Then
 	TrayTip("提示", "检查到 GifCam 最新版，版本为：" & $GIFCAMNEWSIZE & "，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\GifCam.zip") Then FileDelete(@ScriptDir & "\New\GifCam.zip")
-	;InetGet("http://www.bahraniapps.com/apps/gifcam/GifCam.zip", @ScriptDir & "\New\GifCam.zip", 1, 0)
 	ShellExecute($idmpath, '/n /q /d "http://www.bahraniapps.com/apps/gifcam/GifCam.zip" /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "GIFCAM", "ver", $GIFCAMNEWSIZE)
 EndIf
@@ -966,8 +967,6 @@ If $HyperSnapNEWSIZE <> $HyperSnapOldSIZE Then
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\HS8Setup.exe") Then FileDelete(@ScriptDir & "\New\HS8Setup.exe")
 	If FileExists(@ScriptDir & "\New\HS8Setup32.exe") Then FileDelete(@ScriptDir & "\New\HS8Setup32.exe")
-	;InetGet("http://www.hyperionics.com/downloads/HS8Setup.exe",@ScriptDir&"\New\HS8Setup.exe",1,0)
-	;InetGet("http://www.hyperionics.com/downloads/HS8Setup32.exe",@ScriptDir&"\New\HS8Setup32.exe",1,0)
 	ShellExecute($idmpath, '/n /q /d "http://www.hyperionics.com/downloads/HS8Setup32.exe" /p ' & $DownPath, @ScriptDir & "\New", "")
 	ShellExecute($idmpath, '/n /q /d "http://www.hyperionics.com/downloads/HS8Setup.exe" /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "HyperSnap", "ver", $HyperSnapNEWSIZE)
@@ -977,17 +976,17 @@ If $BeyondCompareDURL <> $OLDBeyondCompareDURL Then
 	TrayTip("提示", "检查到 BeyondCompare 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\BeyondCompare-ZH.exe") Then FileDelete(@ScriptDir & "\New\BeyondCompare-ZH.exe")
-	;InetGet($BeyondCompareDURL, @ScriptDir & "\New\BeyondCompare-ZH.exe", 1, 0)
 	ShellExecute($idmpath, '/n /q /d ' & $BeyondCompareDURL & ' /p ' & $DownPath & ' /f BeyondCompare-ZH.exe', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "BeyondCompare", "url", $BeyondCompareDURL)
 EndIf
+
 If $NewPowerISO <> $OLDPowerISO Then
 	TrayTip("提示", "检查到 PowerISO 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\PowerISO6.exe") Then FileDelete(@ScriptDir & "\New\PowerISO6.exe")
 	If FileExists(@ScriptDir & "\New\PowerISO6-x64.exe") Then FileDelete(@ScriptDir & "\New\PowerISO6-x64.exe")
-	;InetGet("http://www.poweriso-files.com/PowerISO6.exe", @ScriptDir & "\New\PowerISO6.exe", 1, 0)
-	;InetGet("http://www.poweriso-files.com/PowerISO6-x64.exe", @ScriptDir & "\New\PowerISO6-x64.exe", 1, 0)
+	ShellExecute($idmpath, '/n /q /d "http://www.poweriso-files.com/PowerISO6.exe" /p ' & $DownPath, @ScriptDir & "\New", "")
+	ShellExecute($idmpath, '/n /q /d "http://www.poweriso-files.com/PowerISO6-x64.exe" /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "PowerISO", "size", $NewPowerISO)
 EndIf
 
@@ -995,7 +994,6 @@ If $NewPicPick <> $OLDpicpick Then
 	TrayTip("提示", "检查到 picpick 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\picpick_portable.zip") Then FileDelete(@ScriptDir & "\New\picpick_portable.zip")
-	;InetGet("http://www.nteworks.com/latestdownload/picpick_portable.zip", @ScriptDir & "\New\picpick_portable.zip", 1, 0)
 	ShellExecute($idmpath, '/n /q /d "http://www.nteworks.com/latestdownload/picpick_portable.zip" /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "picpick", "size", $NewPicPick)
 EndIf
@@ -1004,7 +1002,6 @@ If $NewUltraISO <> $OLDUltraISO Then
 	TrayTip("提示", "检查到 UltraISO 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\UltraISO_PE.exe") Then FileDelete(@ScriptDir & "\New\UltraISO_PE.exe")
-	;InetGet("http://dw.ezbsys.net/uiso9_pe.exe", @ScriptDir & "\New\UltraISO_PE.exe", 1, 0)
 	ShellExecute($idmpath, '/n /q /d "http://dw.ezbsys.net/uiso9_pe.exe" /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "UltraISO", "size", $NewUltraISO)
 EndIf
@@ -1013,11 +1010,9 @@ If $NewAliIM <> $OLDAliIM Then
 	TrayTip("提示", "检查到 阿里旺旺买家版 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\AliIM.exe") Then FileDelete(@ScriptDir & "\New\AliIM.exe")
-	;InetGet("http://download.wangwang.taobao.com/AliIm_taobao.php", @ScriptDir & "\New\AliIM.exe", 1, 0)
 	ShellExecute($idmpath, '/n /q /d "http://download.wangwang.taobao.com/AliIm_taobao.php" /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "AliIM", "size", $NewAliIM)
 EndIf
-
 
 If $NewcFos <> $OLDcFos Then
 	TrayTip("提示", "检查到 cFosSpeed 正式版 最新版，新版开始下载......", 8, 1)
@@ -1134,6 +1129,7 @@ If $New7Zip32b <> $OLD7Zip32b Then
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "7-Zip", "url32b", $New7Zip32b)
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "7-Zip", "url64b", $New7Zip64b)
 EndIf
+
 If $New7Zip32s <> $OLD7Zip32s Then
 	TrayTip("提示", "检查到 7-Zip正式版 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
@@ -1147,7 +1143,21 @@ If $NEWThunderSP <> $OLDThunderSP Then
 	TrayTip("提示", "检查到 迅雷极速版 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $NEWThunderSP & ' /p ' & $DownPath, @ScriptDir & "\New", "")
-	IniWrite(@ScriptDir & "\CheckUp.Dat", "ThunderSP ", "url", $NEWThunderSP)
+	IniWrite(@ScriptDir & "\CheckUp.Dat", "ThunderSP", "url", $NEWThunderSP)
+EndIf
+
+If $NEWFSViewer <> $OLDFSViewer Then
+	TrayTip("提示", "检查到 FastStone Image Viewer 最新版，新版开始下载......", 8, 1)
+	Beep(600, 1000)
+	ShellExecute($idmpath, '/n /q /d ' & $NEWFSViewer & ' /p ' & $DownPath, @ScriptDir & "\New", "")
+	IniWrite(@ScriptDir & "\CheckUp.Dat", "FSViewer", "url", $NEWFSViewer)
+EndIf
+
+If $NEWNotepad2 <> $OLDNotepad2 Then
+	TrayTip("提示", "检查到Notepad2-Mod 最新版，新版开始下载......", 8, 1)
+	Beep(600, 1000)
+	ShellExecute($idmpath, '/n /q /d ' & $NEWNotepad2 & ' /p ' & $DownPath, @ScriptDir & "\New", "")
+	IniWrite(@ScriptDir & "\CheckUp.Dat", "Notepad2", "url", $NEWNotepad2)
 EndIf
 
 TrayTip("提示", "对比完成！程序退出！", 2, 1)

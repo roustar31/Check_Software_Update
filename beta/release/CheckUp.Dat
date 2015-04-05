@@ -39,7 +39,7 @@ url=http://download.mp3tag.de/mp3tagv269asetup.exe
 url32=http://files.emeditor.com/emed32_14.9.3_portable.zip
 url64=http://files.emeditor.com/emed64_14.9.3_portable.zip
 [FSCapture]
-url=http://www.faststonesoft.net/DN/FSCaptureSetup81.zip
+url=http://www.faststonesoft.net/DN/FSCapture81.zip
 [GIFCAM]
 ver=4.5
 [HyperSnap]
@@ -99,3 +99,7 @@ url32s=http://d.7-zip.org/a/7z920.msi
 url64s=http://d.7-zip.org/a/7z920-x64.msi
 [ThunderSP]
 url=http://down.sandai.net/thunderspeed/ThunderSpeed1.0.24.254.exe
+[FSViewer]
+url=http://www.faststonesoft.net/DN/FSViewer53.zip
+[Notepad2]
+url=https://github.com/XhmikosR/notepad2-mod/releases/download/4.2.25.945/Notepad2-mod.4.2.25.945.exe
