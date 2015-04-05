@@ -1,24 +1,24 @@
-#Region ;**** ²ÎÊı´´½¨ÓÚ ACNWrapper_GUI ****
+ï»¿#Region ;**** å‚æ•°åˆ›å»ºäº ACNWrapper_GUI ****
 #AutoIt3Wrapper_Icon=Windows Update.ico
 #AutoIt3Wrapper_OutFile=release\CheckUpDate.exe
 #AutoIt3Wrapper_UseX64=n
-#AutoIt3Wrapper_Res_Comment=Èí¼ş¸üĞÂ¼ì²é¹¤¾ß
-#AutoIt3Wrapper_Res_Description=Èí¼ş¸üĞÂ¼ì²é¹¤¾ß
+#AutoIt3Wrapper_Res_Comment=è½¯ä»¶æ›´æ–°æ£€æŸ¥å·¥å…·
+#AutoIt3Wrapper_Res_Description=è½¯ä»¶æ›´æ–°æ£€æŸ¥å·¥å…·
 #AutoIt3Wrapper_Res_FileVersion=1.5.0.0
-#AutoIt3Wrapper_Res_LegalCopyright=Copyright (c) 2015 î£ÅÉ¿Ë¼¼ÊõÂÛÌ³. All Rights Reserved.
-#AutoIt3Wrapper_Res_Field=OriginalFilename|Èí¼ş¸üĞÂ¼ì²é¹¤¾ß
-#AutoIt3Wrapper_Res_Field=ProductName|Èí¼ş¸üĞÂ¼ì²é¹¤¾ß
+#AutoIt3Wrapper_Res_LegalCopyright=Copyright (c) 2015 ç¿æ´¾å…‹æŠ€æœ¯è®ºå›. All Rights Reserved.
+#AutoIt3Wrapper_Res_Field=OriginalFilename|è½¯ä»¶æ›´æ–°æ£€æŸ¥å·¥å…·
+#AutoIt3Wrapper_Res_Field=ProductName|è½¯ä»¶æ›´æ–°æ£€æŸ¥å·¥å…·
 #AutoIt3Wrapper_Res_Field=ProductVersion|1.5.0.0
-#AutoIt3Wrapper_Res_Field=InternalName|Èí¼ş¸üĞÂ¼ì²é¹¤¾ß
-#AutoIt3Wrapper_Res_Field=FileDescription|×Ô¶¯¼ì²éÈí¼ş¸üĞÂ
-#AutoIt3Wrapper_Res_Field=Comments|×Ô¶¯¼ì²éÈí¼ş¸üĞÂµÄ¹¤¾ß
-#AutoIt3Wrapper_Res_Field=LegalTrademarks|î£ÅÉ¿Ë¼¼ÊõÂÛÌ³
-#AutoIt3Wrapper_Res_Field=CompanyName|î£ÅÉ¿Ë¼¼ÊõÂÛÌ³
-#AutoIt3Wrapper_Res_Field=PowerBy|î£ÅÉ¿Ë¼¼ÊõÂÛÌ³
+#AutoIt3Wrapper_Res_Field=InternalName|è½¯ä»¶æ›´æ–°æ£€æŸ¥å·¥å…·
+#AutoIt3Wrapper_Res_Field=FileDescription|è‡ªåŠ¨æ£€æŸ¥è½¯ä»¶æ›´æ–°
+#AutoIt3Wrapper_Res_Field=Comments|è‡ªåŠ¨æ£€æŸ¥è½¯ä»¶æ›´æ–°çš„å·¥å…·
+#AutoIt3Wrapper_Res_Field=LegalTrademarks|ç¿æ´¾å…‹æŠ€æœ¯è®ºå›
+#AutoIt3Wrapper_Res_Field=CompanyName|ç¿æ´¾å…‹æŠ€æœ¯è®ºå›
+#AutoIt3Wrapper_Res_Field=PowerBy|ç¿æ´¾å…‹æŠ€æœ¯è®ºå›
 #AutoIt3Wrapper_Res_Field=Design|roustar31
 #AutoIt3Wrapper_Res_Field=SourceCode|roustar31
 #AutoIt3Wrapper_Run_Tidy=Y
-#EndRegion ;**** ²ÎÊı´´½¨ÓÚ ACNWrapper_GUI ****
+#EndRegion ;**** å‚æ•°åˆ›å»ºäº ACNWrapper_GUI ****
 
 Opt("TrayMenuMode", 1)
 #include <Array.au3>
@@ -33,11 +33,11 @@ For $i = 1 To $aPid[0][0]
 	If $aPid[$i][1] == @AutoItPID Then ContinueLoop
 	Exit
 Next
-TrayTip("ÌáÊ¾", "ÅĞ¶ÏÁªÍø×´Ì¬ÖĞ.......", 3, 1)
+TrayTip("æç¤º", "åˆ¤æ–­è”ç½‘çŠ¶æ€ä¸­.......", 3, 1)
 Local $Net1 = _RunDOS("ping -n 1 -w 2000 www.baidu.com||exit 303")
 Local $Net2 = _RunDOS("ping -n 1 -w 2000 www.sina.cn||exit 303")
 If $Net1 = "303" And $Net2 = "303" Then
-	TrayTip("ÌáÊ¾", "Ã²ËÆÃ»ÓĞÁªÍø£¬³ÌĞòÍË³ö.......", 3, 1)
+	TrayTip("æç¤º", "è²Œä¼¼æ²¡æœ‰è”ç½‘ï¼Œç¨‹åºé€€å‡º.......", 3, 1)
 	Sleep(1500)
 	Exit
 EndIf
@@ -46,16 +46,16 @@ If Not FileExists(@ScriptDir & "\CheckUp.Dat") Then Exit
 FileSetAttrib(@ScriptDir & "\CheckUp.Dat", "-HSR")
 $taskcheck = IniRead(@ScriptDir & "\CheckUp.Dat", "Task", "ok", "1")
 If $taskcheck = "0" Then
-	TrayTip("ÌáÊ¾", "¼ì²âµ½»¹Ã»ÓĞ×¢²áÎªÈÎÎñ¼Æ»®£¬×¢²áÎª¼Æ»®ÈÎÎñÖĞ.......", 3, 1)
-	RunWait(@ComSpec & ' /c ' & 'schtasks /create /sc minute /mo 25 /tn "¼ì²éÈí¼ş¸üĞÂ" /tr ' & @ScriptDir & '\CheckUpDate.exe')
+	TrayTip("æç¤º", "æ£€æµ‹åˆ°è¿˜æ²¡æœ‰æ³¨å†Œä¸ºä»»åŠ¡è®¡åˆ’ï¼Œæ³¨å†Œä¸ºè®¡åˆ’ä»»åŠ¡ä¸­.......", 3, 1)
+	RunWait(@ComSpec & ' /c ' & 'schtasks /create /sc minute /mo 25 /tn "æ£€æŸ¥è½¯ä»¶æ›´æ–°" /tr ' & @ScriptDir & '\CheckUpDate.exe')
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "Task", "ok", "1")
 EndIf
-TrayTip("ÌáÊ¾", "¶ÁÈ¡±¾µØ°æ±¾ÖĞ.......", 3, 1)
+TrayTip("æç¤º", "è¯»å–æœ¬åœ°ç‰ˆæœ¬ä¸­.......", 3, 1)
 $idmpath = RegRead("HKEY_CURRENT_USER\Software\DownloadManager", "ExePath")
 If $idmpath = "" Then
 	$idmpath = IniRead(@ScriptDir & "\CheckUp.Dat", "IDMExePath", "Path", "")
 	If $idmpath = "" Then
-		MsgBox(64 + 0, "±§Ç¸", "³ÌĞòÃ»ÓĞ¼ì²âµ½IDM¿ÉÖ´ĞĞ³ÌĞò£¡" & "½¨Òé°²×°IDMºóÔÙ´ÎÖØÊÔ£¡", 35)
+		MsgBox(64 + 0, "æŠ±æ­‰", "ç¨‹åºæ²¡æœ‰æ£€æµ‹åˆ°IDMå¯æ‰§è¡Œç¨‹åºï¼" & "å»ºè®®å®‰è£…IDMåå†æ¬¡é‡è¯•ï¼", 35)
 		Exit
 	EndIf
 EndIf
@@ -123,7 +123,7 @@ $KGDownUrl = "http://downmini.kugou.com/kugou"
 $LKDownUrl = "http://chelpus.defcon5.biz/LuckyPatcher.apk"
 $LKPathLogsUrl = "http://chelpus.defcon5.biz/Changelogs.txt"
 Sleep(2000)
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é QQ ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ QQ æ›´æ–°......", 3, 1)
 $QQSurls = _INetGetSource("http://im.qq.com/pcqq")
 If @error Then
 	$QQDURL = $OLDQQDURL
@@ -181,9 +181,9 @@ Else
 	EndIf
 EndIf
 
-;------------------¼ì²é½áÊø----------------------
+;------------------æ£€æŸ¥ç»“æŸ----------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é IDM ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ IDM æ›´æ–°......", 3, 1)
 $IDMSurls = _INetGetSource("http://www.internetdownloadmanager.com/download.html")
 If @error Then
 	$IDMDURL = $OLDIDMDURL
@@ -195,8 +195,8 @@ Else
 		$IDMDURL = $IDMVs[0]
 	EndIf
 EndIf
-;---------------------IDM¼ì²éÍê±Ï---------------------
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é PPTV ¸üĞÂ......", 3, 1)
+;---------------------IDMæ£€æŸ¥å®Œæ¯•---------------------
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ PPTV æ›´æ–°......", 3, 1)
 $PPTVSurls = _INetGetSource("http://app.pptv.com/pc")
 If @error Then
 	$PPTVDURL = $OLDPPTVDURL
@@ -208,8 +208,8 @@ Else
 		$PPTVDURL = $PPTVVs[0]
 	EndIf
 EndIf
-;---------------------PPTV¼ì²éÍê±Ï---------------------
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é WinSnap ¸üĞÂ......", 3, 1)
+;---------------------PPTVæ£€æŸ¥å®Œæ¯•---------------------
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ WinSnap æ›´æ–°......", 3, 1)
 $WinSnapSurls = _INetGetSource("http://www.ntwind.com/software/winsnap.html")
 If @error Then
 	$WinSnapDURL = $OLDWinSnapDURL
@@ -222,7 +222,7 @@ Else
 	EndIf
 EndIf
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é Ñ¸À×¼«ËÙ°æ ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ è¿…é›·æé€Ÿç‰ˆ æ›´æ–°......", 3, 1)
 $ThunderSPSurls = _INetGetSource("http://vip.xunlei.com/fast_xl/index.html")
 If @error Then
 	$NEWThunderSP = $OLDThunderSP
@@ -235,7 +235,7 @@ Else
 	EndIf
 EndIf
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é Notepad2-Mod ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ Notepad2-Mod æ›´æ–°......", 3, 1)
 $Notepad2Surls = _INetGetSource("http://xhmikosr.github.io/notepad2-mod/")
 If @error Then
 	$NEWNotepad2 = $OLDNotepad2
@@ -248,8 +248,8 @@ Else
 	EndIf
 EndIf
 
-;---------------------WinSnap¼ì²éÍê±Ï---------------------
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é BeyondCompare ¸üĞÂ......", 3, 1)
+;---------------------WinSnapæ£€æŸ¥å®Œæ¯•---------------------
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ BeyondCompare æ›´æ–°......", 3, 1)
 $BeyondCompareSurls = _INetGetSource("http://www.scootersoftware.com/download.php?zz=user_translations")
 If @error Then
 	$BeyondCompareDURL = $OLDBeyondCompareDURL
@@ -262,9 +262,9 @@ Else
 	EndIf
 EndIf
 
-;---------------------BeyondCompare¼ì²éÍê±Ï---------------------
+;---------------------BeyondCompareæ£€æŸ¥å®Œæ¯•---------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é WPSÇÀÏÊ°æ ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ WPSæŠ¢é²œç‰ˆ æ›´æ–°......", 3, 1)
 $WPSSurls = _INetGetSource("http://www.wps.cn/product/beta/")
 If @error Then
 	$WPSDURL = $OLDWPSDURL
@@ -276,9 +276,9 @@ Else
 		$WPSDURL = $WPSVs[0]
 	EndIf
 EndIf
-;---------------------WPS1¼ì²éÍê±Ï---------------------
+;---------------------WPS1æ£€æŸ¥å®Œæ¯•---------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é WPSÕıÊ½°æ ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ WPSæ­£å¼ç‰ˆ æ›´æ–°......", 3, 1)
 $WPSSurls2 = _INetGetSource("http://www.wps.cn/product/wps2013/")
 If @error Then
 	$WPSDURL2 = $OLDWPSDURL2
@@ -290,9 +290,9 @@ Else
 		$WPSDURL2 = $WPSVs2[0]
 	EndIf
 EndIf
-;---------------------WPS2¼ì²éÍê±Ï---------------------
+;---------------------WPS2æ£€æŸ¥å®Œæ¯•---------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é DiskGenius ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ DiskGenius æ›´æ–°......", 3, 1)
 $DGSurls = _INetGetSource("http://www.diskgenius.cn/download.php")
 If @error Then
 	$DGDURL = $OLDDGDURL
@@ -306,8 +306,8 @@ Else
 		$DGDURL = $DGVerionx64
 	EndIf
 EndIf
-;---------------------DG¼ì²éÍê±Ï---------------------
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é CCleaner ¸üĞÂ......", 3, 1)
+;---------------------DGæ£€æŸ¥å®Œæ¯•---------------------
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ CCleaner æ›´æ–°......", 3, 1)
 $ccleanerSurls = _INetGetSource("http://www.piriform.com/ccleaner/version-history")
 If @error Then
 	$ccleanerDURL = $OLDccleaner
@@ -319,9 +319,9 @@ Else
 		$ccleanerDURL = StringTrimLeft(StringTrimRight($ccleanerVs[0], 9), 9)
 	EndIf
 EndIf
-;---------------------ccleaner¼ì²éÍê±Ï---------------------
+;---------------------ccleaneræ£€æŸ¥å®Œæ¯•---------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é Defraggler ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ Defraggler æ›´æ–°......", 3, 1)
 $defragglerSurls = _INetGetSource("http://www.piriform.com/defraggler/version-history")
 If @error Then
 	$defragglerDURL = $OLDdefraggler
@@ -333,9 +333,9 @@ Else
 		$defragglerDURL = StringTrimLeft(StringTrimRight($defragglerVs[0], 9), 9)
 	EndIf
 EndIf
-;---------------------defraggler¼ì²éÍê±Ï---------------------
+;---------------------defraggleræ£€æŸ¥å®Œæ¯•---------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é Recuva ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ Recuva æ›´æ–°......", 3, 1)
 $recuvaSurls = _INetGetSource("http://www.piriform.com/recuva/version-history")
 If @error Then
 	$recuvaDURL = $OLDrecuva
@@ -347,9 +347,9 @@ Else
 		$recuvaDURL = StringTrimLeft(StringTrimRight($recuvaVs[0], 9), 9)
 	EndIf
 EndIf
-;---------------------recuva¼ì²éÍê±Ï---------------------
+;---------------------recuvaæ£€æŸ¥å®Œæ¯•---------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é Speccy ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ Speccy æ›´æ–°......", 3, 1)
 $speccySurls = _INetGetSource("http://www.piriform.com/speccy/version-history")
 If @error Then
 	$speccyDURL = $OLDspeccy
@@ -361,9 +361,9 @@ Else
 		$speccyDURL = StringTrimLeft(StringTrimRight($speccyVs[0], 9), 9)
 	EndIf
 EndIf
-;---------------------speccy¼ì²éÍê±Ï---------------------
+;---------------------speccyæ£€æŸ¥å®Œæ¯•---------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é EmEditor ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ EmEditor æ›´æ–°......", 3, 1)
 $EmEditorSurls = _INetGetSource("https://www.emeditor.com/download/")
 If @error Then
 	$EmEditorDURL32 = $OLDEmEditorDURL32
@@ -380,8 +380,8 @@ Else
 		$EmEditorDURL32 = StringReplace($EmEditorDURL64, "emed64", "emed32")
 	EndIf
 EndIf
-;-----------------EmEditor¼ì²éÍê±Ï
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é TagScanner ¸üĞÂ......", 3, 1)
+;-----------------EmEditoræ£€æŸ¥å®Œæ¯•
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ TagScanner æ›´æ–°......", 3, 1)
 $TagScannerSurls = _INetGetSource("http://www.xdlab.ru/en/download.htm")
 If @error Then
 	$TagScannerDURL = $OLDTagScannerDURL
@@ -393,8 +393,8 @@ Else
 		$TagScannerDURL = "http://www.xdlab.ru/" & $TagScannerVs[0]
 	EndIf
 EndIf
-;---------------------TagScanner¼ì²éÍê±Ï---------------------
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é FlashFXP ¸üĞÂ......", 3, 1)
+;---------------------TagScanneræ£€æŸ¥å®Œæ¯•---------------------
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ FlashFXP æ›´æ–°......", 3, 1)
 $FlashFxpSurls = _INetGetSource("http://www.flashfxp.com/download-portable")
 If @error Then
 	$FlashFxpDURL = $OLDFlashFxpDURL
@@ -406,8 +406,8 @@ Else
 		$FlashFxpDURL = StringTrimLeft($FlashFxpVs[0], 12)
 	EndIf
 EndIf
-;------------------FlashFxp¼ì²é½áÊø----------------------
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é EditPlus ¸üĞÂ......", 3, 1)
+;------------------FlashFxpæ£€æŸ¥ç»“æŸ----------------------
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ EditPlus æ›´æ–°......", 3, 1)
 $EditPlusSurls = _INetGetSource("http://www.editplus.com/trouble.html")
 If @error Then
 	$EditPlusDURL32 = $OLDEditPlusDURL32
@@ -424,8 +424,8 @@ Else
 		$EditPlusDURL64 = "http://www.editplus.com/ftp/" & $EditPlusVerion64
 	EndIf
 EndIf
-;------------------Editplus¼ì²é½áÊø----------------------
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é Mp3Tag ¸üĞÂ......", 3, 1)
+;------------------Editplusæ£€æŸ¥ç»“æŸ----------------------
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ Mp3Tag æ›´æ–°......", 3, 1)
 $Mp3TagSurls = _INetGetSource("http://forums.mp3tag.de/index.php?showtopic=57")
 If @error Then
 	$Mp3TagDURL = $OLDMp3TagDURL
@@ -437,63 +437,63 @@ Else
 		$Mp3TagDURL = $Mp3TagVs[0]
 	EndIf
 EndIf
-;------------------Mp3Tag¼ì²é½áÊø----------------------
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é PowerISO ¸üĞÂ......", 3, 1)
+;------------------Mp3Tagæ£€æŸ¥ç»“æŸ----------------------
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ PowerISO æ›´æ–°......", 3, 1)
 $NewPowerISO = InetGetSize("http://www.poweriso-files.com/PowerISO6.exe")
 If @error Or $NewPowerISO = "0" Then
 	$NewPowerISO = $OLDPowerISO
 EndIf
-;------------------PowerISO¼ì²é½áÊø----------------------
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é PicPick ¸üĞÂ......", 3, 1)
+;------------------PowerISOæ£€æŸ¥ç»“æŸ----------------------
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ PicPick æ›´æ–°......", 3, 1)
 $NewPicPick = InetGetSize("http://www.nteworks.com/latestdownload/picpick_portable.zip")
 If @error Or $NewPicPick = "0" Then
 	$NewPicPick = $OLDpicpick
 EndIf
-;------------------PicPick¼ì²é½áÊø----------------------
+;------------------PicPickæ£€æŸ¥ç»“æŸ----------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é UltraISO ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ UltraISO æ›´æ–°......", 3, 1)
 $NewUltraISO = InetGetSize("http://dw.ezbsys.net/uiso9_pe.exe")
 If @error Or $NewUltraISO = "0" Then
 	$NewUltraISO = $OLDUltraISO
 EndIf
-;------------------UltraISO ¼ì²é½áÊø----------------------
+;------------------UltraISO æ£€æŸ¥ç»“æŸ----------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é °¢ÀïÍúÍúÂò¼Ò°æ ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ é˜¿é‡Œæ—ºæ—ºä¹°å®¶ç‰ˆ æ›´æ–°......", 3, 1)
 $NewAliIM = InetGetSize("http://download.wangwang.taobao.com/AliIm_taobao.php")
 If @error Or $NewAliIM = "0" Then
 	$NewAliIM = $OLDAliIM
 EndIf
-;------------------°¢ÀïÍúÍúÂò¼Ò°æ ¼ì²é½áÊø----------------------
+;------------------é˜¿é‡Œæ—ºæ—ºä¹°å®¶ç‰ˆ æ£€æŸ¥ç»“æŸ----------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é PotPlayer ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ PotPlayer æ›´æ–°......", 3, 1)
 $POTDownUrl = "http://117.52.4.235/beta/PotPlayerSetup.exe"
 $POTDownUrl1 = "http://get.daum.net/PotPlayer/v3/PotPlayerSetup.exe"
 $PTNEWSIZE = InetGetSize($POTDownUrl, 1)
 $PTNEWSIZE1 = InetGetSize($POTDownUrl1, 1)
-;------------------PotPlayer¼ì²é½áÊø----------------------
+;------------------PotPlayeræ£€æŸ¥ç»“æŸ----------------------
 
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é TeamViewer ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ TeamViewer æ›´æ–°......", 3, 1)
 $TeamViewerNEW = InetGetSize("http://downloadap3.teamviewer.com/download/TeamViewerPortable.zip", 1)
 If @error Or $TeamViewerNEW = "0" Then
 	$TeamViewerNEW = $OLDTeamViewer
 EndIf
-;------------------TeamViewer¼ì²é½áÊø----------------------
+;------------------TeamVieweræ£€æŸ¥ç»“æŸ----------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é FDM ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ FDM æ›´æ–°......", 3, 1)
 $fdminstNEW = InetGetSize("http://f0.freedownloadmanager.org/fdminst.exe", 1)
 If @error Or $fdminstNEW = "0" Then
 	$fdminstNEW = $OLDfdminst
 EndIf
-;------------------fdminst¼ì²é½áÊø----------------------
+;------------------fdminstæ£€æŸ¥ç»“æŸ----------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é ÍøÒ×ÔÆÒôÀÖ ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ ç½‘æ˜“äº‘éŸ³ä¹ æ›´æ–°......", 3, 1)
 $163MUSICNEWSIZE = InetGetSize("http://music.163.com/api/pc/download/latest", 1)
 If @error Or $163MUSICNEWSIZE = "0" Then
 	$163MUSICNEWSIZE = $163MUSICOldSIZE
 EndIf
-;------------------ÍøÒ×ÔÆÒôÀÖ¼ì²é½áÊø----------------------
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é  FastStone Capture ¸üĞÂ......", 3, 1)
+;------------------ç½‘æ˜“äº‘éŸ³ä¹æ£€æŸ¥ç»“æŸ----------------------
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥  FastStone Capture æ›´æ–°......", 3, 1)
 $FSCaptureSurls = _INetGetSource("http://www.faststone.org/FSCapturerDownload.htm")
 If @error Then
 	$FSCapture = $OLDFSCapture
@@ -502,9 +502,9 @@ Else
 	If @error Then $FSCapture = $OLDFSCapture
 	$FSCapture = $FSCaptures[1]
 EndIf
-;------------------FSCapture¼ì²é½áÊø----------------------
+;------------------FSCaptureæ£€æŸ¥ç»“æŸ----------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é  FastStone Image Viewer ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥  FastStone Image Viewer æ›´æ–°......", 3, 1)
 $FSViewerSurls = _INetGetSource("http://www.faststone.org/FSViewerDownload.htm")
 If @error Then
 	$NEWFSViewer = $OLDFSViewer
@@ -513,9 +513,9 @@ Else
 	If @error Then $NEWFSViewer = $OLDFSViewer
 	$NEWFSViewer = $FSViewers[1]
 EndIf
-;------------------FastStone Image Viewer¼ì²é½áÊø----------------------
+;------------------FastStone Image Vieweræ£€æŸ¥ç»“æŸ----------------------
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é HyperSnap ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ HyperSnap æ›´æ–°......", 3, 1)
 
 $HyperUrls = _INetGetSource("http://www.hyperionics.com/hsdx/downloads.asp")
 If @error Then
@@ -528,8 +528,8 @@ Else
 		$HyperSnapNEWSIZE = StringTrimRight(StringTrimLeft($HyperVERS[0], 7), 4)
 	EndIf
 EndIf
-;------------------HyperSnap¼ì²é½áÊø----------------------
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é GifCam ¸üĞÂ......", 3, 1)
+;------------------HyperSnapæ£€æŸ¥ç»“æŸ----------------------
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ GifCam æ›´æ–°......", 3, 1)
 $GIFCAMNEWSIZE = _INetGetSource("http://blog.bahraniapps.com/category/gifcam/")
 If @error Then
 	$GIFCAMNEWSIZE = $GIFCAMOldSIZE
@@ -542,7 +542,7 @@ Else
 	EndIf
 EndIf
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é ĞÒÔËÆÆ½âÆ÷ ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ å¹¸è¿ç ´è§£å™¨ æ›´æ–°......", 3, 1)
 $Logsget = InetGet($LKPathLogsUrl, @ScriptDir & "\New\Changelogs.txt", 1, 0)
 
 $NewVersion = FileReadLine(@ScriptDir & "\New\Changelogs.txt", 1)
@@ -550,13 +550,13 @@ If @error Then
 	$NewVersion = $OldVersion
 EndIf
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é ¿á¹·ÒôÀÖ ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ é…·ç‹—éŸ³ä¹ æ›´æ–°......", 3, 1)
 For $iK = 1 To 10 Step 1
 	$KGNewVerion = $KGOldVerion + $iK
 	$KGIfNew = InetGetSize($KGDownUrl & $KGNewVerion & ".exe", 1)
 Next
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é  cFosSpeed ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥  cFosSpeed æ›´æ–°......", 3, 1)
 $cFosSurls = _INetGetSource("http://www.cfos.de/zh-cn/download/download.htm")
 If @error Then
 	$NewcFos = $OLDcFos
@@ -580,7 +580,7 @@ Else
 	EndIf
 EndIf
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é  ÆßĞÇä¯ÀÀÆ÷ ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥  ä¸ƒæ˜Ÿæµè§ˆå™¨ æ›´æ–°......", 3, 1)
 $7starurls = _INetGetSource("http://www.qixing123.com/down.php")
 If @error Then
 	$New7star = $OLD7star
@@ -592,7 +592,7 @@ Else
 		$New7star = $7starurls1[0]
 	EndIf
 EndIf
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é  CPU-Z ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥  CPU-Z æ›´æ–°......", 3, 1)
 $cpuzurls = _INetGetSource("http://www.cpuid.com/softwares/cpu-z.html")
 If @error Then
 	$Newcpuz = $OLDcpuz
@@ -605,7 +605,7 @@ Else
 	EndIf
 EndIf
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é  AudioShell ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥  AudioShell æ›´æ–°......", 3, 1)
 $AudioShellurls = _INetGetSource("http://www.softpointer.com/download.htm")
 If @error Then
 	$NewAudioShell = $OLDAudioShell
@@ -618,7 +618,7 @@ Else
 	EndIf
 EndIf
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é Sandboxie ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ Sandboxie æ›´æ–°......", 3, 1)
 $sandboxieurls = _INetGetSource("http://www.sandboxie.com/index.php?AllVersions")
 If @error Then
 	$Newsandboxie32 = $OLDsandboxie32
@@ -635,7 +635,7 @@ Else
 	EndIf
 EndIf
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é 7-Zip ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥ 7-Zip æ›´æ–°......", 3, 1)
 $7Zipurls = _INetGetSource("http://www.7-zip.org/download.html")
 If @error Then
 	$New7Zip32b = $OLD7Zip32b
@@ -658,19 +658,19 @@ Else
 	EndIf
 EndIf
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é  ·ÖÇøÖúÊÖ ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥  åˆ†åŒºåŠ©æ‰‹ æ›´æ–°......", 3, 1)
 Local $oHTTPcn = ObjCreate('microsoft.xmlhttp')
 $oHTTPcn.Open('get', "http://disktool.cn/download.html", 0)
 $oHTTPcn.Send()
 Local $Strcn = BinaryToString($oHTTPcn.responseBody, 4)
-$disktoolS1 = StringRegExp($Strcn, '(°æ±¾.+?´óĞ¡)', 3)
+$disktoolS1 = StringRegExp($Strcn, '(ç‰ˆæœ¬.+?å¤§å°)', 3)
 If @error Then
 	$Newdisktool = $OLDdisktool
 Else
 	$Newdisktool = StringStripCR(StringStripWS(StringTrimRight(StringTrimLeft($disktoolS1[0], 3), 2), 8))
 EndIf
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é  XnView ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥  XnView æ›´æ–°......", 3, 1)
 $XnViewurls = _INetGetSource("http://www.xnview.com/en/xnview")
 If @error Then
 	$NewXnView = $OLDXnView
@@ -679,7 +679,7 @@ Else
 	If @error Then $NewXnView = $OLDXnView
 	$NewXnView = StringTrimRight(StringTrimLeft($XnViewurls1[0], 1), 2)
 EndIf
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é  WinRAR ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥  WinRAR æ›´æ–°......", 3, 1)
 $WinRARurls = _INetGetSource("http://www.rarlab.com")
 If @error Then
 	$NewWinRAR = $OLDWinRAR
@@ -701,7 +701,7 @@ Else
 	EndIf
 EndIf
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é  Autoruns ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥  Autoruns æ›´æ–°......", 3, 1)
 $Autorunsurls = _INetGetSource("https://technet.microsoft.com/en-us/sysinternals/bb963902")
 If @error Then
 	$NewAutoruns = $OLDAutoruns
@@ -711,7 +711,7 @@ Else
 	$NewAutoruns = StringTrimRight(StringTrimLeft($Autorunsurls1[0], 11), 3)
 EndIf
 
-TrayTip("ÌáÊ¾", "¿ªÊ¼¼ì²é  System Explorer ¸üĞÂ......", 3, 1)
+TrayTip("æç¤º", "å¼€å§‹æ£€æŸ¥  System Explorer æ›´æ–°......", 3, 1)
 $SystemExplorerurls = _INetGetSource("http://systemexplorer.net/download.php")
 If @error Then
 	$NewSystemExplorer = $OLDSystemExplorer
@@ -721,10 +721,10 @@ Else
 	$NewSystemExplorer = "http://systemexplorer.net" & StringReplace(StringReplace($SystemExplorerurls1[0], "SystemExplorerSetup", "SystemExplorerPortable"), ".exe", ".zip")
 EndIf
 
-TrayTip("ÌáÊ¾", "ËùÓĞÈí¼ş¸üĞÂ¼ì²éÍê±Ï£¡¿ªÊ¼¶Ô±È°æ±¾......", 3, 1)
+TrayTip("æç¤º", "æ‰€æœ‰è½¯ä»¶æ›´æ–°æ£€æŸ¥å®Œæ¯•ï¼å¼€å§‹å¯¹æ¯”ç‰ˆæœ¬......", 3, 1)
 Sleep(1000)
 If $NewVersion <> $OldVersion Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ LuckyPatcher ×îĞÂ°æ£¬°æ±¾Îª£º" & $NewVersion & "¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° LuckyPatcher æœ€æ–°ç‰ˆï¼Œç‰ˆæœ¬ä¸ºï¼š" & $NewVersion & "å¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\LuckyPatcher.apk") Then FileDelete(@ScriptDir & "\New\LuckyPatcher.apk")
 	ShellExecute($idmpath, '/n /q /d ' & $LKDownUrl & ' /p ' & $DownPath & ' /f LuckyPatcher.apk', @ScriptDir & "\New", "")
@@ -732,7 +732,7 @@ If $NewVersion <> $OldVersion Then
 EndIf
 FileClose($NewVersion)
 If $KGIfNew <> 0 Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ ¿á¹· ×îĞÂ°æ£¬°æ±¾Îª£º" & $KGNewVerion & "¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° é…·ç‹— æœ€æ–°ç‰ˆï¼Œç‰ˆæœ¬ä¸ºï¼š" & $KGNewVerion & "å¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	$NewkugouUrl = $KGDownUrl & $KGNewVerion & ".exe"
 	ShellExecute($idmpath, '/n /q /d ' & $NewkugouUrl & ' /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -740,7 +740,7 @@ If $KGIfNew <> 0 Then
 EndIf
 
 If $PTNEWSIZE <> $PTOldSIZE Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ PotPlayer ²âÊÔ°æ ×îĞÂ°æ£¬ĞÂ°æ´óĞ¡Îª£º" & $PTNEWSIZE & "¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° PotPlayer æµ‹è¯•ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¤§å°ä¸ºï¼š" & $PTNEWSIZE & "å¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\PotPlayerSetupbeta.exe") Then FileDelete(@ScriptDir & "\New\PotPlayerSetupbeta.exe")
 	ShellExecute($idmpath, '/n /q /d ' & $POTDownUrl & ' /p ' & $DownPath & ' /f PotPlayerSetupbeta.exe', @ScriptDir & "\New", "")
@@ -748,7 +748,7 @@ If $PTNEWSIZE <> $PTOldSIZE Then
 EndIf
 
 If $PTNEWSIZE1 <> $PTOldSIZE1 Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ PotPlayer ²âÊÔ°æ ×îĞÂ°æ£¬ĞÂ°æ´óĞ¡Îª£º" & $PTNEWSIZE1 & "¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° PotPlayer æµ‹è¯•ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¤§å°ä¸ºï¼š" & $PTNEWSIZE1 & "å¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\PotPlayerSetup.exe") Then FileDelete(@ScriptDir & "\New\PotPlayerSetup.exe")
 	ShellExecute($idmpath, '/n /q /d ' & $POTDownUrl1 & ' /p ' & $DownPath & ' /f PotPlayerSetup.exe', @ScriptDir & "\New", "")
@@ -758,14 +758,14 @@ EndIf
 
 
 If $163MUSICNEWSIZE <> $163MUSICOldSIZE Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ ÍøÒ×ÔÆÒôÀÖ ÕıÊ½°æ ×îĞÂ°æ£¬ĞÂ°æ´óĞ¡Îª£º" & $163MUSICNEWSIZE & "¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° ç½‘æ˜“äº‘éŸ³ä¹ æ­£å¼ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¤§å°ä¸ºï¼š" & $163MUSICNEWSIZE & "å¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\163music.exe") Then FileDelete(@ScriptDir & "\New\163music.exe")
 	ShellExecute($idmpath, '/n /q /d "http://music.163.com/api/pc/download/latest" /p ' & $DownPath & ' /f 163music.exe', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "163music", "size", $163MUSICNEWSIZE)
 EndIf
 If $OLDIDMDURL <> $IDMDURL Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ IDM ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° IDM æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\IDM.exe") Then FileDelete(@ScriptDir & "\New\IDM.exe")
 	ShellExecute($idmpath, '/n /q /d ' & $IDMDURL & ' /p ' & $DownPath & ' /f IDM.EXE', @ScriptDir & "\New", "")
@@ -773,7 +773,7 @@ If $OLDIDMDURL <> $IDMDURL Then
 EndIf
 
 If $OLDPPTVDURL <> $PPTVDURL Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ PPTV ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° PPTV æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\PPTV.exe") Then FileDelete(@ScriptDir & "\New\PPTV.exe")
 	ShellExecute($idmpath, '/n /q /d ' & $PPTVDURL & ' /p ' & $DownPath & ' /f PPTV.EXE', @ScriptDir & "\New", "")
@@ -781,7 +781,7 @@ If $OLDPPTVDURL <> $PPTVDURL Then
 EndIf
 
 If $OLDWinSnapDURL <> $WinSnapDURL Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ WinSnap ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° WinSnap æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\WinSnap.exe") Then FileDelete(@ScriptDir & "\New\WinSnap.exe")
 	ShellExecute($idmpath, '/n /q /d ' & $WinSnapDURL & ' /p ' & $DownPath & ' /f WinSnap.EXE', @ScriptDir & "\New", "")
@@ -789,7 +789,7 @@ If $OLDWinSnapDURL <> $WinSnapDURL Then
 EndIf
 
 If $OLDWPSDURL2 <> $WPSDURL2 Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ WPS ÕıÊ½°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° WPS æ­£å¼ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\WPS.exe") Then FileDelete(@ScriptDir & "\New\WPS.exe")
 	ShellExecute($idmpath, '/n /q /d ' & $WPSDURL2 & ' /p ' & $DownPath & ' /f WPS.exe', @ScriptDir & "\New", "")
@@ -797,7 +797,7 @@ If $OLDWPSDURL2 <> $WPSDURL2 Then
 EndIf
 
 If $OLDWPSDURL <> $WPSDURL Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ WPS ÇÀÏÊ°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° WPS æŠ¢é²œç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\WPSBeta.exe") Then FileDelete(@ScriptDir & "\New\WPSBeta.exe")
 	ShellExecute($idmpath, '/n /q /d ' & $WPSDURL & ' /p ' & $DownPath & ' /f WPSBeta.exe', @ScriptDir & "\New", "")
@@ -805,7 +805,7 @@ If $OLDWPSDURL <> $WPSDURL Then
 EndIf
 
 If $OLDDGDURL <> $DGDURL Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ DiskGenius ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° DiskGenius æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\DGX64.zip") Then FileDelete(@ScriptDir & "\New\DGX64.zip")
 	If FileExists(@ScriptDir & "\New\DGX86.zip") Then FileDelete(@ScriptDir & "\New\DGX86.zip")
@@ -815,7 +815,7 @@ If $OLDDGDURL <> $DGDURL Then
 EndIf
 
 If $OLDccleaner <> $ccleanerDURL Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ CCleaner ×îĞÂ°æ" & $ccleanerDURL & "£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° CCleaner æœ€æ–°ç‰ˆ" & $ccleanerDURL & "ï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	$ccleanerDURL2 = StringSplit($ccleanerDURL, ".")
 	$ccleanerDURL3 = "http://download.piriform.com/ccsetup" & $ccleanerDURL2[1] & $ccleanerDURL2[2] & "pro.exe"
@@ -824,7 +824,7 @@ If $OLDccleaner <> $ccleanerDURL Then
 EndIf
 
 If $OLDspeccy <> $speccyDURL Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ Speccy ×îĞÂ°æ" & $speccyDURL & "£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° Speccy æœ€æ–°ç‰ˆ" & $speccyDURL & "ï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	$speccyDURL2 = StringSplit($speccyDURL, ".")
 	$speccyDURL3 = "http://download.piriform.com/spsetup" & $speccyDURL2[1] & $speccyDURL2[2] & ".exe"
@@ -833,7 +833,7 @@ If $OLDspeccy <> $speccyDURL Then
 EndIf
 
 If $OLDrecuva <> $recuvaDURL Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ Recuva ×îĞÂ°æ" & $recuvaDURL & "£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° Recuva æœ€æ–°ç‰ˆ" & $recuvaDURL & "ï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	$recuvaDURL2 = StringSplit($recuvaDURL, ".")
 	$recuvaDURL3 = "http://download.piriform.com/spsetup" & $recuvaDURL2[1] & $recuvaDURL2[2] & ".exe"
@@ -842,7 +842,7 @@ If $OLDrecuva <> $recuvaDURL Then
 EndIf
 
 If $OLDdefraggler <> $defragglerDURL Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ Defraggler ×îĞÂ°æ" & $defragglerDURL & "£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° Defraggler æœ€æ–°ç‰ˆ" & $defragglerDURL & "ï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	$defragglerDURL2 = StringSplit($defragglerDURL, ".")
 	$defragglerDURL3 = "http://download.piriform.com/dfsetup" & $defragglerDURL2[1] & $defragglerDURL2[2] & ".exe"
@@ -851,7 +851,7 @@ If $OLDdefraggler <> $defragglerDURL Then
 EndIf
 
 If $OLDTagScannerDURL <> $TagScannerDURL Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ TagScanner ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° TagScanner æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\TagScanner.zip") Then FileDelete(@ScriptDir & "\New\TagScanner.zip")
 	ShellExecute($idmpath, '/n /q /d ' & $TagScannerDURL & ' /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -859,7 +859,7 @@ If $OLDTagScannerDURL <> $TagScannerDURL Then
 EndIf
 
 If $OLDQQDURL <> $QQDURL Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ PC QQ ÕıÊ½°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° PC QQ æ­£å¼ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	Local $QQFileName = $QQVerionSstrings[6] & "." & $QQVerionSstrings[7] & ".exe"
 	ShellExecute($idmpath, '/n /q /d ' & $QQDURL & ' /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -867,7 +867,7 @@ If $OLDQQDURL <> $QQDURL Then
 EndIf
 
 If $QQAndNew <> $QQAndOLD Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ °²×¿QQ ÕıÊ½°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° å®‰å“QQ æ­£å¼ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 
 	ShellExecute($idmpath, '/n /q /d "http://sqdd.myapp.com/myapp/qqteam/AndroidQQ/Android_QQ.apk" /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -875,7 +875,7 @@ If $QQAndNew <> $QQAndOLD Then
 EndIf
 
 If $QQAndINew <> $QQAndIOLD Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ °²×¿QQ ¹ú¼Ê°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° å®‰å“QQ å›½é™…ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 
 	ShellExecute($idmpath, '/n /q /d ' & $QQAndINew & ' /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -883,7 +883,7 @@ If $QQAndINew <> $QQAndIOLD Then
 EndIf
 
 If $QQPCINew <> $QQPCIOLD Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ PC QQ ¹ú¼Ê°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° PC QQ å›½é™…ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 
 	ShellExecute($idmpath, '/n /q /d ' & $QQPCINew & ' /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -891,7 +891,7 @@ If $QQPCINew <> $QQPCIOLD Then
 EndIf
 
 If $QQANDLiteNew <> $QQANDLiteOLD Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ °²×¿QQ ÇáÁÄ°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° å®‰å“QQ è½»èŠç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 
 	ShellExecute($idmpath, '/n /q /d ' & $QQANDLiteNew & ' /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -899,7 +899,7 @@ If $QQANDLiteNew <> $QQANDLiteOLD Then
 EndIf
 
 If $OLDEditPlusDURL32 <> $EditPlusDURL32 Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ EditPlus32Î» ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° EditPlus32ä½ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\EditPlus32.EXE") Then FileDelete(@ScriptDir & "\New\EditPlus32.EXE")
 	ShellExecute($idmpath, '/n /q /d ' & $EditPlusDURL32 & ' /p ' & $DownPath & ' /f EditPlus32.EXE', @ScriptDir & "\New", "")
@@ -907,7 +907,7 @@ If $OLDEditPlusDURL32 <> $EditPlusDURL32 Then
 EndIf
 
 If $OLDEditPlusDURL64 <> $EditPlusDURL64 Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ EditPlus64 Î»×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° EditPlus64 ä½æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\EditPlus64.EXE") Then FileDelete(@ScriptDir & "\New\EditPlus64.EXE")
 	ShellExecute($idmpath, '/n /q /d ' & $EditPlusDURL64 & ' /p ' & $DownPath & ' /f EditPlus64.EXE', @ScriptDir & "\New", "")
@@ -915,7 +915,7 @@ If $OLDEditPlusDURL64 <> $EditPlusDURL64 Then
 EndIf
 
 If $OLDFlashFxpDURL <> $FlashFxpDURL Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ FlashFxp ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° FlashFxp æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\FlashFxp.EXE") Then FileDelete(@ScriptDir & "\New\FlashFxp.EXE")
 	ShellExecute($idmpath, '/n /q /d ' & $FlashFxpDURL & ' /p ' & $DownPath & ' /f FlashFxp.EXE', @ScriptDir & "\New", "")
@@ -923,7 +923,7 @@ If $OLDFlashFxpDURL <> $FlashFxpDURL Then
 EndIf
 
 If $OLDMp3TagDURL <> $Mp3TagDURL Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ Mp3Tag ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° Mp3Tag æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\Mp3Tag.EXE") Then FileDelete(@ScriptDir & "\New\Mp3Tag.EXE")
 	ShellExecute($idmpath, '/n /q /d ' & $Mp3TagDURL & ' /p ' & $DownPath & ' /f Mp3Tag.EXE', @ScriptDir & "\New", "")
@@ -931,7 +931,7 @@ If $OLDMp3TagDURL <> $Mp3TagDURL Then
 EndIf
 
 If $OLDEmEditorDURL32 <> $EmEditorDURL32 Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ EmEditor 32Î» ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° EmEditor 32ä½ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\EmEditor32.EXE") Then FileDelete(@ScriptDir & "\New\EmEditor32.EXE")
 	If FileExists(@ScriptDir & "\New\EmEditor32.zip") Then FileDelete(@ScriptDir & "\New\EmEditor32.zip")
@@ -940,7 +940,7 @@ If $OLDEmEditorDURL32 <> $EmEditorDURL32 Then
 EndIf
 
 If $OLDEmEditorDURL64 <> $EmEditorDURL64 Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ EmEditor 64Î» ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° EmEditor 64ä½ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\EmEditor64.EXE") Then FileDelete(@ScriptDir & "\New\EmEditor64.EXE")
 	If FileExists(@ScriptDir & "\New\EmEditor64.zip") Then FileDelete(@ScriptDir & "\New\EmEditor64.zip")
@@ -949,21 +949,21 @@ If $OLDEmEditorDURL64 <> $EmEditorDURL64 Then
 EndIf
 
 If $FSCapture <> $OLDFSCapture Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ FastStone Capture ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° FastStone Capture æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\FSCapture.zip") Then FileDelete(@ScriptDir & "\New\FSCapture.zip")
 	ShellExecute($idmpath, '/n /q /d ' & $FSCapture & ' /p ' & $DownPath & ' /f FSCapture.zip', @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "FSCapture", "url", $FSCapture)
 EndIf
 If $GIFCAMNEWSIZE <> $GIFCAMOldSIZE Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ GifCam ×îĞÂ°æ£¬°æ±¾Îª£º" & $GIFCAMNEWSIZE & "£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° GifCam æœ€æ–°ç‰ˆï¼Œç‰ˆæœ¬ä¸ºï¼š" & $GIFCAMNEWSIZE & "ï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\GifCam.zip") Then FileDelete(@ScriptDir & "\New\GifCam.zip")
 	ShellExecute($idmpath, '/n /q /d "http://www.bahraniapps.com/apps/gifcam/GifCam.zip" /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "GIFCAM", "ver", $GIFCAMNEWSIZE)
 EndIf
 If $HyperSnapNEWSIZE <> $HyperSnapOldSIZE Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ HyperSnap ×îĞÂ°æ£¬¿ªÊ¼µ÷ÓÃIDMÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° HyperSnap æœ€æ–°ç‰ˆï¼Œå¼€å§‹è°ƒç”¨IDMä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\HS8Setup.exe") Then FileDelete(@ScriptDir & "\New\HS8Setup.exe")
 	If FileExists(@ScriptDir & "\New\HS8Setup32.exe") Then FileDelete(@ScriptDir & "\New\HS8Setup32.exe")
@@ -973,7 +973,7 @@ If $HyperSnapNEWSIZE <> $HyperSnapOldSIZE Then
 EndIf
 
 If $BeyondCompareDURL <> $OLDBeyondCompareDURL Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ BeyondCompare ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° BeyondCompare æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\BeyondCompare-ZH.exe") Then FileDelete(@ScriptDir & "\New\BeyondCompare-ZH.exe")
 	ShellExecute($idmpath, '/n /q /d ' & $BeyondCompareDURL & ' /p ' & $DownPath & ' /f BeyondCompare-ZH.exe', @ScriptDir & "\New", "")
@@ -981,7 +981,7 @@ If $BeyondCompareDURL <> $OLDBeyondCompareDURL Then
 EndIf
 
 If $NewPowerISO <> $OLDPowerISO Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ PowerISO ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° PowerISO æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\PowerISO6.exe") Then FileDelete(@ScriptDir & "\New\PowerISO6.exe")
 	If FileExists(@ScriptDir & "\New\PowerISO6-x64.exe") Then FileDelete(@ScriptDir & "\New\PowerISO6-x64.exe")
@@ -991,7 +991,7 @@ If $NewPowerISO <> $OLDPowerISO Then
 EndIf
 
 If $NewPicPick <> $OLDpicpick Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ picpick ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° picpick æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\picpick_portable.zip") Then FileDelete(@ScriptDir & "\New\picpick_portable.zip")
 	ShellExecute($idmpath, '/n /q /d "http://www.nteworks.com/latestdownload/picpick_portable.zip" /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -999,7 +999,7 @@ If $NewPicPick <> $OLDpicpick Then
 EndIf
 
 If $NewUltraISO <> $OLDUltraISO Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ UltraISO ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° UltraISO æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\UltraISO_PE.exe") Then FileDelete(@ScriptDir & "\New\UltraISO_PE.exe")
 	ShellExecute($idmpath, '/n /q /d "http://dw.ezbsys.net/uiso9_pe.exe" /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -1007,7 +1007,7 @@ If $NewUltraISO <> $OLDUltraISO Then
 EndIf
 
 If $NewAliIM <> $OLDAliIM Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ °¢ÀïÍúÍúÂò¼Ò°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° é˜¿é‡Œæ—ºæ—ºä¹°å®¶ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\AliIM.exe") Then FileDelete(@ScriptDir & "\New\AliIM.exe")
 	ShellExecute($idmpath, '/n /q /d "http://download.wangwang.taobao.com/AliIm_taobao.php" /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -1015,35 +1015,35 @@ If $NewAliIM <> $OLDAliIM Then
 EndIf
 
 If $NewcFos <> $OLDcFos Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ cFosSpeed ÕıÊ½°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° cFosSpeed æ­£å¼ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $NewcFos & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "cFosSpeed", "url1", $NewcFos)
 EndIf
 
 If $NewcFosb <> $OLDcFosb Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ cFosSpeed ²âÊÔ°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° cFosSpeed æµ‹è¯•ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $NewcFosb & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "cFosSpeed", "url2", $NewcFosb)
 EndIf
 
 If $New7star <> $OLD7star Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ ÆßĞÇä¯ÀÀÆ÷ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° ä¸ƒæ˜Ÿæµè§ˆå™¨ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $New7star & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "7star", "url", $New7star)
 EndIf
 
 If $Newcpuz <> $OLDcpuz Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ CPU-Z ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° CPU-Z æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $Newcpuz & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "CPU-Z", "url", $Newcpuz)
 EndIf
 
 If $TeamViewerNEW <> $OLDTeamViewer Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ TeamViewer ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° TeamViewer æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\TeamViewerPortable.zip") Then FileDelete(@ScriptDir & "\New\TeamViewerPortable.zip")
 	ShellExecute($idmpath, '/n /q /d "http://downloadap3.teamviewer.com/download/TeamViewerPortable.zip" /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -1051,7 +1051,7 @@ If $TeamViewerNEW <> $OLDTeamViewer Then
 EndIf
 
 If $fdminstNEW <> $OLDfdminst Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ FDM ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° FDM æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\fdminst.exe") Then FileDelete(@ScriptDir & "\New\fdminst.exe")
 	ShellExecute($idmpath, '/n /q /d "http://f0.freedownloadmanager.org/fdminst.exe" /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -1059,14 +1059,14 @@ If $fdminstNEW <> $OLDfdminst Then
 EndIf
 
 If $NewAudioShell <> $OLDAudioShell Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ AudioShell ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° AudioShell æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $NewAudioShell & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "AudioShell", "url", $NewAudioShell)
 EndIf
 
 If $Newdisktool <> $OLDdisktool Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ ·ÖÇøÖúÊÖ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° åˆ†åŒºåŠ©æ‰‹ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\PAGreen.zip") Then FileDelete(@ScriptDir & "\New\PAGreen.zip")
 	ShellExecute($idmpath, '/n /q /d "http://www.aomeisoftware.com/download/pacn/PAGreen.zip" /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -1074,7 +1074,7 @@ If $Newdisktool <> $OLDdisktool Then
 EndIf
 
 If $NewXnView <> $OLDXnView Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ XnView " & $NewXnView & "£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° XnView " & $NewXnView & "ï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\XnView-win.zip") Then FileDelete(@ScriptDir & "\New\XnView-win.zip")
 	ShellExecute($idmpath, '/n /q /d "http://download.xnview.com/XnView-win.zip" /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -1082,7 +1082,7 @@ If $NewXnView <> $OLDXnView Then
 EndIf
 
 If $NewWinRAR <> $OLDWinRAR Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ WinRARÓ¢ÎÄ°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° WinRARè‹±æ–‡ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $NewWinRAR32EngUrl & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	ShellExecute($idmpath, '/n /q /d ' & $NewWinRAR64EngUrl & ' /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -1090,7 +1090,7 @@ If $NewWinRAR <> $OLDWinRAR Then
 EndIf
 
 If $NewWinRARC <> $OLDWinRARC Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ WinRARÖĞÎÄ°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° WinRARä¸­æ–‡ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $NewWinRAR32ChnUrl & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	ShellExecute($idmpath, '/n /q /d ' & $NewWinRAR64ChnUrl & ' /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -1098,7 +1098,7 @@ If $NewWinRARC <> $OLDWinRARC Then
 EndIf
 
 If $OLDsandboxie32 <> $Newsandboxie32 Or $OLDsandboxie64 <> $Newsandboxie64 Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ Sandboxie ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° Sandboxie æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $Newsandboxie32 & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	ShellExecute($idmpath, '/n /q /d ' & $Newsandboxie64 & ' /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -1107,7 +1107,7 @@ If $OLDsandboxie32 <> $Newsandboxie32 Or $OLDsandboxie64 <> $Newsandboxie64 Then
 EndIf
 
 If $NewAutoruns <> $OLDAutoruns Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ Autoruns ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° Autoruns æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	If FileExists(@ScriptDir & "\New\Autoruns.zip") Then FileDelete(@ScriptDir & "\New\Autoruns.zip")
 	ShellExecute($idmpath, '/n /q /d "https://download.sysinternals.com/files/Autoruns.zip" /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -1115,14 +1115,14 @@ If $NewAutoruns <> $OLDAutoruns Then
 EndIf
 
 If $NewSystemExplorer <> $OLDSystemExplorer Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ System Explorer ×îĞÂ°æ£¬ÓÉÓÚ¹ÙÍøÓĞ·ÀÖ¹µÁÁ´¹¦ÄÜ£¬ÏÂÃæ´ò¿ªä¯ÀÀÆ÷½øĞĞÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° System Explorer æœ€æ–°ç‰ˆï¼Œç”±äºå®˜ç½‘æœ‰é˜²æ­¢ç›—é“¾åŠŸèƒ½ï¼Œä¸‹é¢æ‰“å¼€æµè§ˆå™¨è¿›è¡Œä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	Run(@ProgramFilesDir & "\Internet Explorer\iexplore.exe " & $NewSystemExplorer)
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "SystemExplorer", "url", $NewSystemExplorer)
 EndIf
 
 If $New7Zip32b <> $OLD7Zip32b Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ 7-Zip²âÊÔ°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° 7-Zipæµ‹è¯•ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $New7Zip32b & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	ShellExecute($idmpath, '/n /q /d ' & $New7Zip64b & ' /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -1131,7 +1131,7 @@ If $New7Zip32b <> $OLD7Zip32b Then
 EndIf
 
 If $New7Zip32s <> $OLD7Zip32s Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ 7-ZipÕıÊ½°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° 7-Zipæ­£å¼ç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $New7Zip32s & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	ShellExecute($idmpath, '/n /q /d ' & $New7Zip64s & ' /p ' & $DownPath, @ScriptDir & "\New", "")
@@ -1140,27 +1140,27 @@ If $New7Zip32s <> $OLD7Zip32s Then
 EndIf
 
 If $NEWThunderSP <> $OLDThunderSP Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ Ñ¸À×¼«ËÙ°æ ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° è¿…é›·æé€Ÿç‰ˆ æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $NEWThunderSP & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "ThunderSP", "url", $NEWThunderSP)
 EndIf
 
 If $NEWFSViewer <> $OLDFSViewer Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½ FastStone Image Viewer ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ° FastStone Image Viewer æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $NEWFSViewer & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "FSViewer", "url", $NEWFSViewer)
 EndIf
 
 If $NEWNotepad2 <> $OLDNotepad2 Then
-	TrayTip("ÌáÊ¾", "¼ì²éµ½Notepad2-Mod ×îĞÂ°æ£¬ĞÂ°æ¿ªÊ¼ÏÂÔØ......", 8, 1)
+	TrayTip("æç¤º", "æ£€æŸ¥åˆ°Notepad2-Mod æœ€æ–°ç‰ˆï¼Œæ–°ç‰ˆå¼€å§‹ä¸‹è½½......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $NEWNotepad2 & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "Notepad2", "url", $NEWNotepad2)
 EndIf
 
-TrayTip("ÌáÊ¾", "¶Ô±ÈÍê³É£¡³ÌĞòÍË³ö£¡", 2, 1)
+TrayTip("æç¤º", "å¯¹æ¯”å®Œæˆï¼ç¨‹åºé€€å‡ºï¼", 2, 1)
 FileSetAttrib(@ScriptDir & "\CheckUp.Dat", "+R")
 Sleep(1000)
 Exit
