@@ -4,11 +4,12 @@
 #AutoIt3Wrapper_UseX64=n
 #AutoIt3Wrapper_Res_Comment=软件更新检查工具
 #AutoIt3Wrapper_Res_Description=软件更新检查工具
-#AutoIt3Wrapper_Res_FileVersion=1.5.0.0
+#AutoIt3Wrapper_Res_Fileversion=1.5.0.3
+#AutoIt3Wrapper_Res_FileVersion_AutoIncrement=y
 #AutoIt3Wrapper_Res_LegalCopyright=Copyright (c) 2015 睿派克技术论坛. All Rights Reserved.
 #AutoIt3Wrapper_Res_Field=OriginalFilename|软件更新检查工具
 #AutoIt3Wrapper_Res_Field=ProductName|软件更新检查工具
-#AutoIt3Wrapper_Res_Field=ProductVersion|1.5.0.0
+#AutoIt3Wrapper_Res_Field=ProductVersion|1.5.0.3
 #AutoIt3Wrapper_Res_Field=InternalName|软件更新检查工具
 #AutoIt3Wrapper_Res_Field=FileDescription|自动检查软件更新
 #AutoIt3Wrapper_Res_Field=Comments|自动检查软件更新的工具
@@ -62,6 +63,7 @@ EndIf
 $DownPath = @ScriptDir & "\New"
 If Not FileExists($DownPath) Then DirCreate($DownPath)
 $OLDNotepad2 = IniRead(@ScriptDir & "\CheckUp.Dat", "Notepad2", "url", "")
+$OLDFoxitreader = IniRead(@ScriptDir & "\CheckUp.Dat", "Foxitreader", "time", "")
 $OLDThunderSP = IniRead(@ScriptDir & "\CheckUp.Dat", "ThunderSP", "url", "")
 $OLDSystemExplorer = IniRead(@ScriptDir & "\CheckUp.Dat", "SystemExplorer", "url", "")
 $OLDAutoruns = IniRead(@ScriptDir & "\CheckUp.Dat", "Autoruns", "date", "")
@@ -291,6 +293,19 @@ Else
 	EndIf
 EndIf
 ;---------------------WPS2检查完毕---------------------
+
+TrayTip("提示", "开始检查 Foxit Reader 更新......", 3, 1)
+$FoxitReaderSurl = _INetGetSource("http://cdn01.foxitsoftware.com/pub/foxit/reader/desktop/win/7.x/")
+If @error Then
+	$NEWFoxitreader = $OLDFoxitreader
+Else
+	$FoxitReaderSurl2 = StringRegExp($FoxitReaderSurl, '(</a></td><td align="right">.+?</td>)', 3)
+	If @error Or $FoxitReaderSurl2 = "1" Then
+		$NEWFoxitreader = $OLDFoxitreader
+	Else
+		$NEWFoxitreader = StringTrimRight(StringTrimLeft($FoxitReaderSurl2[1], 27), 7)
+	EndIf
+EndIf
 
 TrayTip("提示", "开始检查 DiskGenius 更新......", 3, 1)
 $DGSurls = _INetGetSource("http://www.diskgenius.cn/download.php")
@@ -1119,6 +1134,13 @@ If $NewSystemExplorer <> $OLDSystemExplorer Then
 	Beep(600, 1000)
 	Run(@ProgramFilesDir & "\Internet Explorer\iexplore.exe " & $NewSystemExplorer)
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "SystemExplorer", "url", $NewSystemExplorer)
+EndIf
+
+If $NEWFoxitreader <> $OLDFoxitreader Then
+	TrayTip("提示", "检查到 Foxit Reader 最新版，由于无法确定具体下载地址，下面打开浏览器请自行下载......", 8, 1)
+	Beep(600, 1000)
+	Run(@ProgramFilesDir & "\Internet Explorer\iexplore.exe http://cdn01.foxitsoftware.com/pub/foxit/reader/desktop/win")
+	IniWrite(@ScriptDir & "\CheckUp.Dat", "Foxitreader", "time", $NEWFoxitreader)
 EndIf
 
 If $New7Zip32b <> $OLD7Zip32b Then
