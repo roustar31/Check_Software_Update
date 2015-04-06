@@ -4,12 +4,11 @@
 #AutoIt3Wrapper_UseX64=n
 #AutoIt3Wrapper_Res_Comment=软件更新检查工具
 #AutoIt3Wrapper_Res_Description=软件更新检查工具
-#AutoIt3Wrapper_Res_Fileversion=1.5.0.3
-#AutoIt3Wrapper_Res_FileVersion_AutoIncrement=y
+#AutoIt3Wrapper_Res_FileVersion=1.5.0.4
 #AutoIt3Wrapper_Res_LegalCopyright=Copyright (c) 2015 睿派克技术论坛. All Rights Reserved.
 #AutoIt3Wrapper_Res_Field=OriginalFilename|软件更新检查工具
 #AutoIt3Wrapper_Res_Field=ProductName|软件更新检查工具
-#AutoIt3Wrapper_Res_Field=ProductVersion|1.5.0.3
+#AutoIt3Wrapper_Res_Field=ProductVersion|1.5.0.4
 #AutoIt3Wrapper_Res_Field=InternalName|软件更新检查工具
 #AutoIt3Wrapper_Res_Field=FileDescription|自动检查软件更新
 #AutoIt3Wrapper_Res_Field=Comments|自动检查软件更新的工具
@@ -62,6 +61,9 @@ If $idmpath = "" Then
 EndIf
 $DownPath = @ScriptDir & "\New"
 If Not FileExists($DownPath) Then DirCreate($DownPath)
+$OLDSSDZ = IniRead(@ScriptDir & "\CheckUp.Dat", "SSDZ", "url", "")
+$OLDWinContig = IniRead(@ScriptDir & "\CheckUp.Dat", "WinContig", "ver", "")
+$OLDAIDA64 = IniRead(@ScriptDir & "\CheckUp.Dat", "AIDA64", "url", "")
 $OLDNotepad2 = IniRead(@ScriptDir & "\CheckUp.Dat", "Notepad2", "url", "")
 $OLDFoxitreader = IniRead(@ScriptDir & "\CheckUp.Dat", "Foxitreader", "time", "")
 $OLDThunderSP = IniRead(@ScriptDir & "\CheckUp.Dat", "ThunderSP", "url", "")
@@ -234,6 +236,45 @@ Else
 		$NEWThunderSP = $OLDThunderSP
 	Else
 		$NEWThunderSP = $ThunderSPVs[0]
+	EndIf
+EndIf
+
+TrayTip("提示", "开始检查 AIDA64 更新......", 3, 1)
+$AIDA64Surls = _INetGetSource("http://www.aida64.com/downloads/latesta64xe")
+If @error Then
+	$NEWAIDA64 = $OLDAIDA64
+Else
+	$AIDA64Vs = StringRegExp($AIDA64Surls, '(http://download.aida64.com/aida64extreme.+?exe)', 3)
+	If @error Or $AIDA64Vs = "1" Then
+		$NEWAIDA64 = $OLDAIDA64
+	Else
+		$NEWAIDA64 = StringReplace($AIDA64Vs[0], ".exe", ".zip", 0, 0)
+	EndIf
+EndIf
+
+TrayTip("提示", "开始检查 WinContig 更新......", 3, 1)
+$WinContigSurls = _INetGetSource("http://wincontig.mdtzone.it/en/history.htm")
+If @error Then
+	$NEWWinContig = $OLDWinContig
+Else
+	$WinContigVs = StringRegExp($WinContigSurls, '(What.+?:)', 3)
+	If @error Or $WinContigVs = "1" Then
+		$NEWWinContig = $OLDWinContig
+	Else
+		$NEWWinContig = StringTrimRight(StringTrimLeft(StringStripWS($WinContigVs[0], 8), 18), 1)
+	EndIf
+EndIf
+
+TrayTip("提示", "开始检查 SSD-Z 更新......", 3, 1)
+$SSDZSurls = _INetGetSource("http://aezay.dk/aezay/ssdz/")
+If @error Then
+	$NEWSSDZ = $OLDSSDZ
+Else
+	$SSDZVs = StringRegExp($SSDZSurls, '(SSD-Z_.+?.rar)', 3)
+	If @error Or $SSDZVs = "1" Then
+		$NEWSSDZ = $OLDSSDZ
+	Else
+		$NEWSSDZ = "http://aezay.dk/aezay/ssdz/" & $SSDZVs[0]
 	EndIf
 EndIf
 
@@ -1166,6 +1207,32 @@ If $NEWThunderSP <> $OLDThunderSP Then
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $NEWThunderSP & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "ThunderSP", "url", $NEWThunderSP)
+EndIf
+
+If $NEWAIDA64 <> $OLDAIDA64 Then
+	TrayTip("提示", "检查到 AIDA64 最新版，新版开始下载......", 8, 1)
+	Beep(600, 1000)
+	ShellExecuteWait($idmpath, '/n /q /d ' & $NEWAIDA64 & ' /p ' & $DownPath, @ScriptDir & "\New", "")
+	$NEWAIDA64E = StringReplace($NEWAIDA64, "extreme", "engineer", 0, 0)
+	$NEWAIDA64B = StringReplace($NEWAIDA64, "extreme", "business", 0, 0)
+	ShellExecuteWait($idmpath, '/n /q /d ' & $NEWAIDA64E & ' /p ' & $DownPath, @ScriptDir & "\New", "")
+	ShellExecuteWait($idmpath, '/n /q /d ' & $NEWAIDA64B & ' /p ' & $DownPath, @ScriptDir & "\New", "")
+	IniWrite(@ScriptDir & "\CheckUp.Dat", "AIDA64", "url", $NEWAIDA64)
+EndIf
+
+If $NEWWinContig <> $OLDWinContig Then
+	TrayTip("提示", "检查到 WinContig 最新版，新版开始下载......", 8, 1)
+	Beep(600, 1000)
+	If FileExists(@ScriptDir & "\NEW\WContig.zip") Then FileDelete(@ScriptDir & "\NEW\WContig.zip")
+	ShellExecuteWait($idmpath, '/n /q /d "http://www.mdtzone.it/Files/WContig.zip" /p ' & $DownPath, @ScriptDir & "\New", "")
+	IniWrite(@ScriptDir & "\CheckUp.Dat", "WinContig", "ver", $NEWWinContig)
+EndIf
+
+If $NEWSSDZ <> $OLDSSDZ Then
+	TrayTip("提示", "检查到 SSD-Z 最新版，新版开始下载......", 8, 1)
+	Beep(600, 1000)
+	ShellExecute($idmpath, '/n /q /d ' & $NEWSSDZ & ' /p ' & $DownPath, @ScriptDir & "\New", "")
+	IniWrite(@ScriptDir & "\CheckUp.Dat", "SSDZ", "url", $NEWSSDZ)
 EndIf
 
 If $NEWFSViewer <> $OLDFSViewer Then

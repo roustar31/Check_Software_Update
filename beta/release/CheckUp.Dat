@@ -4,7 +4,7 @@ path=
 [luckPath]
 verion=5.5.3
 [pot]
-size=21034040
+size=21038808
 size1=20942656
 [kugou]
 verion=7690
@@ -105,3 +105,9 @@ url=http://www.faststonesoft.net/DN/FSViewer53.zip
 url=https://github.com/XhmikosR/notepad2-mod/releases/download/4.2.25.945/Notepad2-mod.4.2.25.945.exe
 [Foxitreader]
 time=11-Mar-2015 20:09
+[AIDA64]
+url=http://download.aida64.com/aida64extreme520.zip
+[WinContig]
+ver=1.35.04
+[SSDZ]
+url=http://aezay.dk/aezay/ssdz/SSD-Z_15.03.15wip.rar
