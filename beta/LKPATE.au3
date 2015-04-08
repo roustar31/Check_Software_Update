@@ -1,14 +1,14 @@
 #Region ;**** 参数创建于 ACNWrapper_GUI ****
 #AutoIt3Wrapper_Icon=Windows Update.ico
-#AutoIt3Wrapper_OutFile=release\CheckUpDate.exe
+#AutoIt3Wrapper_OutFile=CheckUpDate.exe
 #AutoIt3Wrapper_UseX64=n
 #AutoIt3Wrapper_Res_Comment=软件更新检查工具
 #AutoIt3Wrapper_Res_Description=软件更新检查工具
-#AutoIt3Wrapper_Res_FileVersion=1.5.0.4
+#AutoIt3Wrapper_Res_FileVersion=1.5.0.5
 #AutoIt3Wrapper_Res_LegalCopyright=Copyright (c) 2015 睿派克技术论坛. All Rights Reserved.
 #AutoIt3Wrapper_Res_Field=OriginalFilename|软件更新检查工具
 #AutoIt3Wrapper_Res_Field=ProductName|软件更新检查工具
-#AutoIt3Wrapper_Res_Field=ProductVersion|1.5.0.4
+#AutoIt3Wrapper_Res_Field=ProductVersion|1.5.0.5
 #AutoIt3Wrapper_Res_Field=InternalName|软件更新检查工具
 #AutoIt3Wrapper_Res_Field=FileDescription|自动检查软件更新
 #AutoIt3Wrapper_Res_Field=Comments|自动检查软件更新的工具
@@ -61,6 +61,8 @@ If $idmpath = "" Then
 EndIf
 $DownPath = @ScriptDir & "\New"
 If Not FileExists($DownPath) Then DirCreate($DownPath)
+$OLDFlashPlayer = IniRead(@ScriptDir & "\CheckUp.Dat", "FlashPlayer", "size", "")
+$OLDJavaRT = IniRead(@ScriptDir & "\CheckUp.Dat", "JavaRT", "url", "")
 $OLDSSDZ = IniRead(@ScriptDir & "\CheckUp.Dat", "SSDZ", "url", "")
 $OLDWinContig = IniRead(@ScriptDir & "\CheckUp.Dat", "WinContig", "ver", "")
 $OLDAIDA64 = IniRead(@ScriptDir & "\CheckUp.Dat", "AIDA64", "url", "")
@@ -519,6 +521,12 @@ $NewAliIM = InetGetSize("http://download.wangwang.taobao.com/AliIm_taobao.php")
 If @error Or $NewAliIM = "0" Then
 	$NewAliIM = $OLDAliIM
 EndIf
+
+TrayTip("提示", "开始检查 Adobe Flash Player 更新......", 3, 1)
+$NewFlashPlayer = InetGetSize("http://fpdownload.macromedia.com/pub/flashplayer/latest/help/install_flash_player_ax.exe")
+If @error Or $NewFlashPlayer = "0" Then
+	$NewFlashPlayer = $OLDFlashPlayer
+EndIf
 ;------------------阿里旺旺买家版 检查结束----------------------
 
 TrayTip("提示", "开始检查 PotPlayer 更新......", 3, 1)
@@ -559,6 +567,7 @@ Else
 	$FSCapture = $FSCaptures[1]
 EndIf
 ;------------------FSCapture检查结束----------------------
+
 
 TrayTip("提示", "开始检查  FastStone Image Viewer 更新......", 3, 1)
 $FSViewerSurls = _INetGetSource("http://www.faststone.org/FSViewerDownload.htm")
@@ -892,7 +901,7 @@ If $OLDrecuva <> $recuvaDURL Then
 	TrayTip("提示", "检查到 Recuva 最新版" & $recuvaDURL & "，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	$recuvaDURL2 = StringSplit($recuvaDURL, ".")
-	$recuvaDURL3 = "http://download.piriform.com/spsetup" & $recuvaDURL2[1] & $recuvaDURL2[2] & ".exe"
+	$recuvaDURL3 = "http://download.piriform.com/rcsetup" & $recuvaDURL2[1] & $recuvaDURL2[2] & ".exe"
 	ShellExecute($idmpath, '/n /q /d ' & $recuvaDURL3 & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "recuva", "ver", $recuvaDURL)
 EndIf
@@ -1243,10 +1252,19 @@ If $NEWFSViewer <> $OLDFSViewer Then
 EndIf
 
 If $NEWNotepad2 <> $OLDNotepad2 Then
-	TrayTip("提示", "检查到Notepad2-Mod 最新版，新版开始下载......", 8, 1)
+	TrayTip("提示", "检查到 Notepad2-Mod 最新版，新版开始下载......", 8, 1)
 	Beep(600, 1000)
 	ShellExecute($idmpath, '/n /q /d ' & $NEWNotepad2 & ' /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "Notepad2", "url", $NEWNotepad2)
+EndIf
+
+If $NewFlashPlayer <> $OLDFlashPlayer Then
+	TrayTip("提示", "检查到 Adobe Flash Player 最新版，新版开始下载......", 8, 1)
+	Beep(600, 1000)
+	ShellExecute($idmpath, '/n /q /d "http://fpdownload.macromedia.com/pub/flashplayer/latest/help/install_flash_player_ax.exe"  /p ' & $DownPath, @ScriptDir & "\New", "")
+	ShellExecute($idmpath, '/n /q /d "http://fpdownload.macromedia.com/pub/flashplayer/latest/help/install_flash_player.exe" /p ' & $DownPath, @ScriptDir & "\New", "")
+	ShellExecute($idmpath, '/n /q /d "http://fpdownload.macromedia.com/pub/flashplayer/latest/help/install_flash_player_ppapi.exe" /p ' & $DownPath, @ScriptDir & "\New", "")
+	IniWrite(@ScriptDir & "\CheckUp.Dat", "FlashPlayer", "size", $NewFlashPlayer)
 EndIf
 
 TrayTip("提示", "对比完成！程序退出！", 2, 1)

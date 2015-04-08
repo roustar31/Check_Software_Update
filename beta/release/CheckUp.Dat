@@ -2,9 +2,9 @@
 path=
 ;此用来手动指定程序使用的IDM主程序路径，默认程序读取注册表获取，读取不到才到这里获取
 [luckPath]
-verion=5.5.3
+verion=5.5.5
 [pot]
-size=21038808
+size=21040840
 size1=20942656
 [kugou]
 verion=7690
@@ -13,7 +13,7 @@ size=33502704
 [IDM]
 url=http://mirror2.internetdownloadmanager.com/idman623build10.exe
 [PPTV]
-url=http://download.pplive.com/pptvsetup_3.6.0.0036.exe
+url=http://download.pplive.com/pptvsetup_3.6.0.0066.exe
 [WinSnap]
 url=http://www.ntwind.com/download/WinSnap_4.5.3-setup.exe
 [DG]
@@ -36,8 +36,8 @@ url=http://get.flashfxp.com/ftp/client/download/FlashFXP51_3826_Portable.exe
 [Mp3Tag]
 url=http://download.mp3tag.de/mp3tagv269asetup.exe
 [EmEditor]
-url32=http://files.emeditor.com/emed32_14.9.3_portable.zip
-url64=http://files.emeditor.com/emed64_14.9.3_portable.zip
+url32=http://files.emeditor.com/emed32_15.0.0_portable.zip
+url64=http://files.emeditor.com/emed64_15.0.0_portable.zip
 [FSCapture]
 url=http://www.faststonesoft.net/DN/FSCapture81.zip
 [GIFCAM]
@@ -62,7 +62,7 @@ url=http://down.qixing123.com/down/1.39.9.297/7xing_1.39.9.exe
 [CPU-Z]
 url=http://www.cpuid.com/downloads/cpu-z/cpu-z_1.72-cn.zip
 [fdminst]
-size=10729912
+size=10730144
 [AudioShell]
 url=http://www.softpointer.com/downloads/AudioShell231.exe
 [disktool]
@@ -75,7 +75,7 @@ url2=http://wdl1.cache.wps.cn/wps/download/W.P.S.4953.12012.0.exe
 [speccy]
 ver=1.28.709
 [recuva]
-ver=1.51.1063
+ver=1.52.1086
 [defraggler]
 ver=2.19.982
 [XnView]
@@ -111,3 +111,5 @@ url=http://download.aida64.com/aida64extreme520.zip
 ver=1.35.04
 [SSDZ]
 url=http://aezay.dk/aezay/ssdz/SSD-Z_15.03.15wip.rar
+[FlashPlayer]
+size=17658544

@@ -1,4 +1,8 @@
-﻿1.5.0.4
+﻿1.5.0.5
+新增加Adobe Flash Player的检查
+修正Recuva下载地址不正确的问题
+
+1.5.0.4
 新增加AIDA64、WinContig、SSD-Z的检查
 
 1.5.0.3
