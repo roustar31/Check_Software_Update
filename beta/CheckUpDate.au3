@@ -4,11 +4,11 @@
 #AutoIt3Wrapper_UseX64=n
 #AutoIt3Wrapper_Res_Comment=软件更新检查工具
 #AutoIt3Wrapper_Res_Description=软件更新检查工具
-#AutoIt3Wrapper_Res_FileVersion=1.5.0.5
+#AutoIt3Wrapper_Res_FileVersion=1.5.0.6
 #AutoIt3Wrapper_Res_LegalCopyright=Copyright (c) 2015 睿派克技术论坛. All Rights Reserved.
 #AutoIt3Wrapper_Res_Field=OriginalFilename|软件更新检查工具
 #AutoIt3Wrapper_Res_Field=ProductName|软件更新检查工具
-#AutoIt3Wrapper_Res_Field=ProductVersion|1.5.0.5
+#AutoIt3Wrapper_Res_Field=ProductVersion|1.5.0.6
 #AutoIt3Wrapper_Res_Field=InternalName|软件更新检查工具
 #AutoIt3Wrapper_Res_Field=FileDescription|自动检查软件更新
 #AutoIt3Wrapper_Res_Field=Comments|自动检查软件更新的工具
@@ -61,8 +61,10 @@ If $idmpath = "" Then
 EndIf
 $DownPath = @ScriptDir & "\New"
 If Not FileExists($DownPath) Then DirCreate($DownPath)
+$OLDEverythingx86 = IniRead(@ScriptDir & "\CheckUp.Dat", "Everything", "url1", "")
+$OLDEverythingx64 = IniRead(@ScriptDir & "\CheckUp.Dat", "Everything", "url2", "")
 $OLDFlashPlayer = IniRead(@ScriptDir & "\CheckUp.Dat", "FlashPlayer", "size", "")
-$OLDJavaRT = IniRead(@ScriptDir & "\CheckUp.Dat", "JavaRT", "url", "")
+$OLDVMWare = IniRead(@ScriptDir & "\CheckUp.Dat", "VMWare", "size", "")
 $OLDSSDZ = IniRead(@ScriptDir & "\CheckUp.Dat", "SSDZ", "url", "")
 $OLDWinContig = IniRead(@ScriptDir & "\CheckUp.Dat", "WinContig", "ver", "")
 $OLDAIDA64 = IniRead(@ScriptDir & "\CheckUp.Dat", "AIDA64", "url", "")
@@ -277,6 +279,22 @@ Else
 		$NEWSSDZ = $OLDSSDZ
 	Else
 		$NEWSSDZ = "http://aezay.dk/aezay/ssdz/" & $SSDZVs[0]
+	EndIf
+EndIf
+
+TrayTip("提示", "开始检查 Everything 更新......", 3, 1)
+$EverythingSurls = _INetGetSource("http://www.voidtools.com/downloads")
+If @error Then
+	$NEWEverythingx86 = $OLDEverythingx86
+	$NEWEverythingx64 = $OLDEverythingx64
+Else
+	$EverythingVs = StringRegExp($EverythingSurls, '(http://www.voidtools.com/Everything-.+?.Multilingual.zip)', 3)
+	If @error Or $EverythingVs = "1" Then
+		$NEWEverythingx86 = $OLDEverythingx86
+		$NEWEverythingx64 = $OLDEverythingx64
+	Else
+		$NEWEverythingx86 = $EverythingVs[0]
+		$NEWEverythingx64 = $EverythingVs[1]
 	EndIf
 EndIf
 
@@ -527,6 +545,13 @@ $NewFlashPlayer = InetGetSize("http://fpdownload.macromedia.com/pub/flashplayer/
 If @error Or $NewFlashPlayer = "0" Then
 	$NewFlashPlayer = $OLDFlashPlayer
 EndIf
+
+TrayTip("提示", "开始检查 VMware Workstation 更新......", 3, 1)
+$NewVMWare = InetGetSize("http://www.vmware.com/go/tryworkstation-win")
+If @error Or $NewVMWare = "0" Then
+	$NewVMWare = $OLDVMWare
+EndIf
+
 ;------------------阿里旺旺买家版 检查结束----------------------
 
 TrayTip("提示", "开始检查 PotPlayer 更新......", 3, 1)
@@ -870,12 +895,9 @@ If $OLDWPSDURL <> $WPSDURL Then
 EndIf
 
 If $OLDDGDURL <> $DGDURL Then
-	TrayTip("提示", "检查到 DiskGenius 最新版，新版开始下载......", 8, 1)
+	TrayTip("提示", "检查到 DiskGenius 最新版，由于官网有防盗链，下面打开浏览器自行下载......", 8, 1)
 	Beep(600, 1000)
-	If FileExists(@ScriptDir & "\New\DGX64.zip") Then FileDelete(@ScriptDir & "\New\DGX64.zip")
-	If FileExists(@ScriptDir & "\New\DGX86.zip") Then FileDelete(@ScriptDir & "\New\DGX86.zip")
-	ShellExecute($idmpath, '/n /q /d ' & $DGVerionx64 & ' /p ' & $DownPath & ' /f DGX64.zip', @ScriptDir & "\New", "")
-	ShellExecute($idmpath, '/n /q /d ' & $DGVerionx86 & ' /p ' & $DownPath & ' /f DGX86.zip', @ScriptDir & "\New", "")
+	ShellExecute("http://www.diskgenius.cn/download.php")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "DG", "url", $DGDURL)
 EndIf
 
@@ -1265,6 +1287,22 @@ If $NewFlashPlayer <> $OLDFlashPlayer Then
 	ShellExecute($idmpath, '/n /q /d "http://fpdownload.macromedia.com/pub/flashplayer/latest/help/install_flash_player.exe" /p ' & $DownPath, @ScriptDir & "\New", "")
 	ShellExecute($idmpath, '/n /q /d "http://fpdownload.macromedia.com/pub/flashplayer/latest/help/install_flash_player_ppapi.exe" /p ' & $DownPath, @ScriptDir & "\New", "")
 	IniWrite(@ScriptDir & "\CheckUp.Dat", "FlashPlayer", "size", $NewFlashPlayer)
+EndIf
+
+If $NewVMWare <> $OLDVMWare Then
+	TrayTip("提示", "检查到 VMware Workstation 最新版，新版开始下载......", 8, 1)
+	Beep(600, 1000)
+	ShellExecute($idmpath, '/n /q /d "http://www.vmware.com/go/tryworkstation-win"  /p ' & $DownPath, @ScriptDir & "\New", "")
+	IniWrite(@ScriptDir & "\CheckUp.Dat", "VMWare", "size", $NewVMWare)
+EndIf
+
+If $NEWEverythingx64 <> $OLDEverythingx64 And $NEWEverythingx86 <> $OLDEverythingx86 Then
+	TrayTip("提示", "检查到 Everything 最新版，新版开始下载......", 8, 1)
+	Beep(600, 1000)
+	ShellExecute($idmpath, '/n /q /d ' & $NEWEverythingx64 & ' /p ' & $DownPath, @ScriptDir & "\New", "")
+	ShellExecute($idmpath, '/n /q /d ' & $NEWEverythingx86 & ' /p ' & $DownPath, @ScriptDir & "\New", "")
+	IniWrite(@ScriptDir & "\CheckUp.Dat", "Everything", "url1", $NEWEverythingx86)
+	IniWrite(@ScriptDir & "\CheckUp.Dat", "Everything", "url2", $NEWEverythingx64)
 EndIf
 
 TrayTip("提示", "对比完成！程序退出！", 2, 1)

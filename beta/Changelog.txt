@@ -1,4 +1,8 @@
-﻿1.5.0.5
+﻿1.5.0.6
+新增加VMware Workstation、Everything的检查
+修正Diskgenius官网防盗链无法下载的问题
+
+1.5.0.5
 新增加Adobe Flash Player的检查
 修正Recuva下载地址不正确的问题
 

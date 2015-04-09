@@ -2,7 +2,7 @@
 path=
 ;此用来手动指定程序使用的IDM主程序路径，默认程序读取注册表获取，读取不到才到这里获取
 [luckPath]
-verion=5.5.5
+verion=5.5.6
 [pot]
 size=21040840
 size1=20942656
@@ -17,7 +17,7 @@ url=http://download.pplive.com/pptvsetup_3.6.0.0066.exe
 [WinSnap]
 url=http://www.ntwind.com/download/WinSnap_4.5.3-setup.exe
 [DG]
-url=http://www.diskgenius.cn/download/dl/DG470/DG470_x86.zip
+url=http://www.diskgenius.cn/download/dl/DG471/DG471_x86.zip
 [ccleaner]
 ver=5.04.5151
 [TagScanner]
@@ -47,7 +47,7 @@ ver=8.05.00
 [BeyondCompare]
 url=http://www.scootersoftware.com/BCompare-zh-4.0.7.19761.exe
 [PowerISO]
-size=2898816
+size=2899632
 [picpick]
 size=12523267
 [UltraISO]
@@ -113,3 +113,8 @@ ver=1.35.04
 url=http://aezay.dk/aezay/ssdz/SSD-Z_15.03.15wip.rar
 [FlashPlayer]
 size=17658544
+[VMWare]
+size=316230584
+[Everything]
+url1=http://www.voidtools.com/Everything-1.3.4.686.x86.Multilingual.zip
+url2=http://www.voidtools.com/Everything-1.3.4.686.x64.Multilingual.zip
